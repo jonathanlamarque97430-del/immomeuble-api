@@ -106,9 +106,11 @@ ITEMS_BEDROOM = [
 ]
 
 # Items bureau — ajoutés à la chambre pour profil etudiant / jeune_actif
+# Bureau + chaise : pas de gamme_min → inclus dès économique (critique pour étudiant)
+# Lampe de bureau : gamme_min standard → optionnelle en économique
 ITEMS_BUREAU = [
-    {"name": "Bureau compact 120 cm",           "reference": "MICKE",       "category": "bureau",      "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 89,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard", "product_url": "https://www.ikea.com/fr/fr/p/micke-bureau-blanc-90214308/"},
-    {"name": "Chaise de bureau ergonomique",    "reference": "LOBERGET",    "category": "bureau",      "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 99,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
+    {"name": "Bureau compact 120 cm",           "reference": "MICKE",       "category": "bureau",      "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 89,  "quantity": 1, "lmnp_criteria": [], "product_url": "https://www.ikea.com/fr/fr/p/micke-bureau-blanc-90214308/"},
+    {"name": "Chaise de bureau",                "reference": "LOBERGET",    "category": "bureau",      "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 49,  "quantity": 1, "lmnp_criteria": []},
     {"name": "Lampe de bureau LED",             "reference": "FORSA",       "category": "luminaires",  "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 35,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
 ]
 
@@ -189,10 +191,12 @@ ITEMS_BATHROOM = [
     # Entretien obligatoire LMNP
     {"name": "Kit entretien (balai, serpillière, seau)",     "reference": "Set entretien",   "category": "entretien",   "retailer": "Leroy Merlin", "tag_type": "essentiel_lmnp", "unit_price": 35, "quantity": 1, "lmnp_criteria": ["entretien"], "product_url": "https://www.leroymerlin.fr/produits/salle-de-bains-wc/nettoyage-et-entretien/"},
     {"name": "Balai-brosse WC",                              "reference": "Set WC",          "category": "entretien",   "retailer": "Leroy Merlin", "tag_type": "essentiel_lmnp", "unit_price": 12, "quantity": 1, "lmnp_criteria": ["entretien"]},
+    # Confort de base — porte-serviettes sans gamme_min (utile dès économique)
+    {"name": "Porte-serviettes",                             "reference": "GRUNDTAL",        "category": "accessoires", "retailer": "IKEA",         "tag_type": "confort",        "unit_price": 15, "quantity": 1, "lmnp_criteria": []},
     # Confort Standard
     {"name": "Meuble sous-vasque ou colonne",                "reference": "GODMORGON",       "category": "rangements",  "retailer": "IKEA",         "tag_type": "confort",        "unit_price": 120,"quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
     {"name": "Miroir salle de bain",                         "reference": "GODMORGON",       "category": "miroir",      "retailer": "IKEA",         "tag_type": "confort",        "unit_price": 69, "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
-    {"name": "Porte-serviettes & accessoires",               "reference": "GODMORGON",       "category": "accessoires", "retailer": "IKEA",         "tag_type": "confort",        "unit_price": 55, "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
+    {"name": "Set accessoires salle de bain",                "reference": "GODMORGON",       "category": "accessoires", "retailer": "IKEA",         "tag_type": "confort",        "unit_price": 43, "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
     {"name": "Tapis de bain",                                "reference": "TOFTBO",          "category": "tapis",       "retailer": "IKEA",         "tag_type": "confort",        "unit_price": 35, "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
     # Confort Premium
     {"name": "Rangement salle de bain mural",                "reference": "SILVERAN",        "category": "rangements",  "retailer": "IKEA",         "tag_type": "confort",        "unit_price": 110,"quantity": 1, "lmnp_criteria": [], "gamme_min": "premium"},
