@@ -1,0 +1,22 @@
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0
+pytest>=8.0.0
+httpx>=0.27.0
+
+# Base de données
+sqlalchemy>=2.0.30    # ORM — SQLite dev / PostgreSQL prod
+
+# Phase 2 — LLM
+# openai>=1.30.0
+# tenacity>=8.3.0
+# jsonref>=1.1.0
+
+# Phase 3 — PostgreSQL (remplace SQLite)
+# psycopg2-binary>=2.9.9
+# alembic>=1.13.0
+
+psycopg2-binary>=2.9.9
+pytest>=8.0.0
+uvicorn[standard]>=0.32.0
+

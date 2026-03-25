@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMMOMEUBLE — Packs mobilier LMNP</title>
+<style>
+/* ═══════════════════════════════════════════════
+   IMMOMEUBLE v13 — Design Warm Light PropTech
+   Typographie : Baskerville (titres) + Segoe UI
+   Palette : Crème chaude · Encre profonde · Or
+═══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#F8F4EE;--bg2:#F0EBE2;--bg3:#E8E0D5;
+  --surface:#FFFFFF;--surfZ:#FDFBF8;
+  --ink:#1A1510;--ink2:#4A4438;--ink3:#8A7E70;--ink4:#B8ADA0;
+  --gold:#B8872A;--gold2:#D4A843;
+  --goldbg:rgba(184,135,42,.09);--goldbdr:rgba(184,135,42,.22);
+  --bdr:rgba(26,21,16,.08);--bdr2:rgba(26,21,16,.14);
+  --ok:#1A6B42;--okbg:rgba(26,107,66,.08);--okbdr:rgba(26,107,66,.20);
+  --warn:#8A5500;--warnbg:rgba(138,85,0,.08);
+  --err:#9A2525;--errbg:rgba(154,37,37,.07);--errbdr:rgba(154,37,37,.20);
+  --fSerif:"Baskerville","Book Antiqua","Palatino Linotype",Georgia,serif;
+  --fSans:"Segoe UI","Helvetica Neue",system-ui,sans-serif;
+  --fMono:"Cascadia Code",Consolas,"Courier New",monospace;
+  --r:8px;--rl:12px;--tr:160ms ease;
+}
+html,body{font-family:var(--fSans);font-size:14px;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100%;}
+input,select,button{font-family:inherit;font-size:inherit;}
+a{color:var(--gold);text-decoration:none;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--goldbdr);border-radius:99px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:translateY(0);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+.fu{animation:fadeUp 260ms cubic-bezier(.22,.68,0,1.1) both;}
+.fu1{animation-delay:60ms;}.fu2{animation-delay:120ms;}.fu3{animation-delay:180ms;}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--bdr);box-shadow:0 1px 0 rgba(184,135,42,.07);}
+.hdr::after{content:'';position:absolute;bottom:0;left:32px;right:32px;height:1px;background:linear-gradient(90deg,var(--gold) 0%,transparent 40%);opacity:.25;}
+.hdr-in{max-width:1200px;margin:0 auto;height:60px;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-i{width:32px;height:32px;border-radius:var(--r);background:var(--goldbg);border:1.5px solid var(--goldbdr);display:flex;align-items:center;justify-content:center;font-family:var(--fSerif);font-size:15px;font-weight:700;color:var(--gold);}
+.logo-n{font-family:var(--fSerif);font-size:15px;font-weight:700;color:var(--ink);letter-spacing:.3px;}
+.logo-t{font-family:var(--fMono);font-size:7.5px;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;opacity:.75;margin-top:1px;}
+.stepper{display:flex;align-items:center;}
+.stp{display:flex;align-items:center;gap:7px;padding:4px 12px;border-radius:var(--r);cursor:pointer;border:none;background:transparent;transition:background var(--tr);}
+.stp:hover{background:var(--bg2);}
+.stp.active{background:var(--goldbg);}
+.stp-n{width:20px;height:20px;border-radius:50%;flex-shrink:0;border:1.5px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-family:var(--fMono);font-size:9px;color:var(--ink3);transition:all var(--tr);}
+.stp.active .stp-n{border-color:var(--gold);background:var(--goldbg);color:var(--gold);}
+.stp.done .stp-n{border-color:var(--ok);background:var(--okbg);color:var(--ok);font-size:11px;}
+.stp-l{font-family:var(--fMono);font-size:11px;color:var(--ink3);letter-spacing:.4px;white-space:nowrap;}
+.stp.active .stp-l{color:var(--ink);font-weight:600;}
+.stp.done .stp-l{color:var(--ink2);}
+.stp-sep{width:20px;height:1px;background:var(--bdr2);flex-shrink:0;}
+.ver{font-family:var(--fMono);font-size:8px;color:var(--ink4);letter-spacing:1px;flex-shrink:0;}
+
+/* SCREENS */
+.screen{display:none;}
+.screen.active{display:block;animation:fadeUp 240ms cubic-bezier(.22,.68,0,1.1);}
+.wrap{max-width:1200px;margin:0 auto;padding:32px 32px 80px;}
+
+/* TYPOGRAPHY */
+.scr-title{font-family:var(--fSerif);font-size:28px;font-weight:400;color:var(--ink);letter-spacing:.2px;line-height:1.2;}
+.scr-sub{font-size:13px;color:var(--ink2);margin-top:6px;line-height:1.5;}
+.section-head{margin-bottom:28px;}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--bdr);border-radius:var(--rl);padding:18px 20px;box-shadow:0 1px 8px rgba(26,21,16,.055);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold) 0%,transparent 55%);opacity:.22;}
+.card-lbl{font-family:var(--fMono);font-size:8px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.section-divider{height:1px;background:var(--bdr);margin:20px -20px;}
+.group-ttl{font-family:var(--fMono);font-size:7.5px;color:var(--ink3);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bdr);}
+
+/* FORM */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.fld{display:flex;flex-direction:column;gap:4px;}
+.flbl{font-family:var(--fMono);font-size:8px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;}
+.req{color:var(--err);margin-left:3px;}
+.finp,.fsel{display:block;width:100%;background:var(--surface);border:1px solid var(--bdr2);border-radius:var(--r);padding:8px 11px;font-size:13px;color:var(--ink);outline:none;transition:border-color var(--tr),box-shadow var(--tr);}
+.finp:focus,.fsel:focus{border-color:var(--goldbdr);box-shadow:0 0 0 3px var(--goldbg);}
+.finp::placeholder{color:var(--ink4);}
+.fsel option{background:var(--bg);}
+.finp.err{border-color:var(--err)!important;}
+.ferr{font-size:10px;color:var(--err);min-height:14px;margin-top:3px;}
+.fhnt{font-size:10px;color:var(--ink3);margin-top:3px;line-height:1.4;}
+input[type=range]{width:100%;height:3px;border-radius:99px;appearance:none;cursor:pointer;outline:none;background:linear-gradient(90deg,var(--gold) var(--pct,50%),var(--bdr2) var(--pct,50%));}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;border-radius:50%;background:var(--gold);border:2px solid var(--surface);box-shadow:0 0 0 3px rgba(184,135,42,.18);cursor:pointer;}
+input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 5px rgba(184,135,42,.22);}
+
+/* GAMME CARDS */
+.gamme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.gc{border:1px solid var(--bdr);border-radius:var(--r);padding:14px 16px;cursor:pointer;background:var(--surfZ);transition:all var(--tr);position:relative;overflow:hidden;}
+.gc:hover{border-color:var(--goldbdr);}
+.gc.sel{border-color:var(--gold);background:var(--goldbg);box-shadow:0 0 18px rgba(184,135,42,.10);}
+.gc.sel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);}
+.gc-n{font-family:var(--fSerif);font-size:15px;font-weight:700;color:var(--ink);}
+.gc-r{font-family:var(--fMono);font-size:8.5px;color:var(--gold);margin-top:2px;opacity:.85;}
+.gc-d{font-size:11px;color:var(--ink2);margin-top:5px;line-height:1.4;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all var(--tr);white-space:nowrap;}
+.btn-p{background:var(--gold);color:#FFF8EE;font-weight:600;box-shadow:0 2px 10px rgba(184,135,42,.28);}
+.btn-p:hover:not(:disabled){background:var(--gold2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(184,135,42,.38);}
+.btn-p:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+.btn-g{background:transparent;color:var(--ink2);border:1px solid var(--bdr2);}
+.btn-g:hover{border-color:var(--goldbdr);color:var(--gold);background:var(--goldbg);}
+.spin{display:inline-block;width:13px;height:13px;border-radius:50%;border:2px solid rgba(255,248,238,.2);border-top-color:#FFF8EE;animation:spin .7s linear infinite;flex-shrink:0;}
+
+/* TAGS */
+.tag-e,.tag-c{display:inline-flex;align-items:center;padding:2px 7px;border-radius:999px;font-family:var(--fMono);font-size:7.5px;font-weight:700;white-space:nowrap;flex-shrink:0;cursor:default;}
+.tag-e{background:var(--goldbg);color:var(--gold);border:1px solid var(--goldbdr);}
+.tag-c{background:var(--okbg);color:var(--ok);border:1px solid var(--okbdr);}
+
+/* BADGE LMNP */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-family:var(--fMono);font-size:8px;letter-spacing:.5px;border:1px solid;}
+.badge-ok{background:var(--okbg);border-color:var(--okbdr);color:var(--ok);}
+.badge-warn{background:var(--warnbg);border-color:rgba(138,85,0,.22);color:var(--warn);}
+
+/* ERROR BANNER */
+.err-banner{display:flex;gap:10px;background:var(--errbg);border:1px solid var(--errbdr);border-radius:var(--r);padding:12px 14px;margin-bottom:16px;animation:fadeUp 180ms ease;}
+.err-ico{font-size:16px;flex-shrink:0;margin-top:1px;}
+.err-ttl{font-size:13px;font-weight:600;color:var(--err);margin-bottom:4px;}
+.err-msg{font-size:12px;color:var(--ink2);}
+.err-btns{display:flex;gap:8px;margin-top:8px;}
+
+/* ─── SCREEN 1 ─── */
+.s1-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;}
+
+/* Recap sidebar */
+.recap-card{background:var(--goldbg);border:1px solid var(--goldbdr);}
+.recap-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--goldbdr);font-size:12px;}
+.recap-row:last-child{border-bottom:none;}
+.recap-k{color:var(--ink2);}
+.recap-v{color:var(--ink);font-weight:500;}
+
+/* ─── SCREEN 2 ─── */
+.s2-layout{display:grid;grid-template-columns:1fr 240px;gap:20px;align-items:start;}
+
+/* Gauge budget */
+.gauge-block{margin-bottom:24px;}
+.gauge-row{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:8px;}
+.gauge-cost{font-family:var(--fSerif);font-size:36px;font-weight:400;color:var(--gold);line-height:1;}
+.gauge-lbl{font-size:11px;color:var(--ink2);margin-top:4px;}
+.gauge-eco{font-family:var(--fSerif);font-size:18px;font-weight:400;}
+.eco-ok{color:var(--ok);}
+.eco-over{color:var(--err);}
+.gauge-track{height:3px;background:var(--bdr2);border-radius:99px;overflow:hidden;}
+.gauge-fill{height:100%;border-radius:99px;transition:width .8s cubic-bezier(.22,.68,0,1.1);}
+.gf-ok{background:linear-gradient(90deg,var(--ok),#5BB887);}
+.gf-over{background:var(--err);}
+.reassurance{font-size:10px;color:var(--ink2);line-height:1.55;margin-top:8px;}
+
+/* Room cards */
+.room-card{margin-bottom:12px;}
+.room-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 16px;background:var(--surfZ);
+  border-radius:var(--rl) var(--rl) 0 0;cursor:pointer;
+  border:1px solid var(--bdr);border-bottom:none;
+  transition:background var(--tr);user-select:none;
+}
+.room-hd.closed{border-radius:var(--rl);border-bottom:1px solid var(--bdr);}
+.room-hd:hover{background:var(--bg2);}
+.room-ico{font-size:18px;flex-shrink:0;}
+.room-name{font-family:var(--fMono);font-size:9px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;}
+.room-cnt{font-size:10px;color:var(--ink3);margin-top:1px;}
+.room-total{font-family:var(--fSerif);font-size:16px;color:var(--gold);}
+.room-chev{font-size:10px;color:var(--ink3);margin-left:6px;transition:transform 200ms;display:inline-block;}
+.room-chev.open{transform:rotate(0deg);}
+.room-chev.closed{transform:rotate(-90deg);}
+.room-body{border:1px solid var(--bdr);border-top:none;border-radius:0 0 var(--rl) var(--rl);overflow:hidden;}
+
+/* Item rows */
+.item-row{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 16px;border-bottom:1px solid var(--bdr);
+  border-left:2px solid transparent;
+  transition:background var(--tr);
+}
+.item-row:last-child{border-bottom:none;}
+.item-row:hover{background:rgba(184,135,42,.02);}
+.item-row.mandatory{border-left-color:var(--gold);background:rgba(184,135,42,.025);}
+.item-info{flex:1;min-width:0;}
+.item-name{font-size:12px;color:var(--ink);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.item-meta{display:flex;align-items:center;gap:7px;margin-top:2px;flex-wrap:wrap;}
+.item-retailer{font-family:var(--fMono);font-size:9px;color:var(--ink3);}
+.item-ref{font-family:var(--fMono);font-size:9px;color:var(--ink4);background:var(--bg2);padding:1px 5px;border-radius:3px;}
+.item-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.item-qty{font-family:var(--fMono);font-size:10px;color:var(--ink3);}
+.item-price{font-family:var(--fSerif);font-size:14px;color:var(--gold);min-width:58px;text-align:right;}
+
+/* LMNP Checklist sidebar */
+.lmnp-sidebar{position:sticky;top:80px;}
+.lmnp-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--bdr);font-size:11px;}
+.lmnp-row:last-child{border-bottom:none;}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.dot-ok{background:var(--ok);}
+.dot-miss{background:var(--err);}
+
+/* Legend */
+.legend{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 14px;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr);font-size:11px;color:var(--ink2);line-height:1.8;margin-top:4px;}
+
+/* ─── SCREEN 3 ─── */
+.ctx-bar{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:12px 18px;background:var(--surface);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:24px;}
+.ctx-it{display:flex;flex-direction:column;gap:1px;}
+.ctx-lbl{font-family:var(--fMono);font-size:7px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;}
+.ctx-val{font-size:12px;color:var(--ink);}
+.ctx-sep{width:1px;height:24px;background:var(--bdr2);flex-shrink:0;}
+
+/* Retailer card */
+.ret-card{margin-bottom:16px;}
+.ret-hd{
+  padding:14px 18px 12px;background:var(--surfZ);
+  border:1px solid var(--bdr);border-bottom:none;
+  border-radius:var(--rl) var(--rl) 0 0;
+  position:relative;
+}
+.ret-hd::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold) 0%,transparent 60%);opacity:.35;}
+.ret-name{font-family:var(--fSerif);font-size:20px;font-weight:700;color:var(--ink);}
+.ret-cnt{font-family:var(--fMono);font-size:8.5px;color:var(--gold);margin-top:3px;opacity:.8;}
+.ret-kpis{display:flex;gap:12px;margin-top:8px;font-size:11px;flex-wrap:wrap;}
+.kpi-ess{color:var(--gold);}
+.kpi-cft{color:var(--ok);}
+
+/* Items table */
+.ret-table-wrap{border:1px solid var(--bdr);border-top:none;overflow:hidden;}
+.ret-table{width:100%;border-collapse:collapse;}
+.ret-table thead th{
+  padding:7px 14px;
+  font-family:var(--fMono);font-size:7.5px;color:var(--ink3);
+  letter-spacing:1.2px;text-transform:uppercase;
+  background:var(--bg2);border-bottom:1px solid var(--bdr2);
+  text-align:left;
+}
+.ret-table thead th.right{text-align:right;}
+.ret-table thead th.center{text-align:center;}
+.ret-table tbody td{padding:9px 14px;border-bottom:1px solid var(--bdr);font-size:12px;color:var(--ink);vertical-align:middle;}
+.ret-table tbody tr:last-child td{border-bottom:none;}
+.ret-table tbody tr:hover td{background:rgba(184,135,42,.02);}
+.td-name{font-weight:500;max-width:200px;}
+.td-room{font-size:10px;color:var(--ink3);margin-top:2px;}
+.td-ref{font-family:var(--fMono);font-size:9px;color:var(--ink4);background:var(--bg2);padding:2px 5px;border-radius:3px;display:inline-block;}
+.td-right{text-align:right;font-family:var(--fMono);font-size:11px;color:var(--ink2);}
+.td-center{text-align:center;font-family:var(--fMono);font-size:11px;color:var(--ink2);}
+.td-price{text-align:right;font-family:var(--fSerif);font-size:14px;color:var(--gold);}
+.td-link{display:block;font-family:var(--fMono);font-size:8px;color:var(--gold);
+  cursor:pointer;transition:all var(--tr);text-decoration:none;}
+.td-link:hover{opacity:.8;text-decoration:underline;}
+.td-link--wip{color:var(--ink3);opacity:.5;cursor:default;}
+.td-link--wip:hover{opacity:.5;text-decoration:none;}
+
+.ret-ft{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 18px;background:var(--bg2);
+  border:1px solid var(--bdr);border-top:none;
+  border-radius:0 0 var(--rl) var(--rl);
+}
+.ret-sub-lbl{font-family:var(--fMono);font-size:7.5px;color:var(--ink3);letter-spacing:1px;text-transform:uppercase;}
+.ret-sub{font-family:var(--fSerif);font-size:22px;color:var(--gold);}
+
+/* ─── SCREEN 4 ─── */
+.s4-layout{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;}
+.recap-fin-total{font-family:var(--fSerif);font-size:44px;font-weight:400;color:var(--gold);line-height:1;}
+.dist-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr);font-size:13px;}
+.dist-row:last-child{border-bottom:none;}
+.dist-name{color:var(--ink);font-weight:500;}
+.dist-cnt{font-size:10px;color:var(--ink3);margin-top:1px;}
+.dist-amount{font-family:var(--fSerif);font-size:16px;color:var(--gold);}
+
+.share-block{background:var(--surface);border:1px solid var(--bdr);border-radius:var(--rl);padding:18px 20px;margin-bottom:14px;position:relative;overflow:hidden;}
+.share-block::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold) 0%,transparent 55%);opacity:.22;}
+.share-slug{background:var(--bg2);border:1px solid var(--bdr2);border-radius:var(--r);padding:8px 11px;font-family:var(--fMono);font-size:11px;color:var(--ink2);word-break:break-all;margin-bottom:10px;}
+
+.future-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--bdr);}
+.future-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.future-ico{font-size:18px;flex-shrink:0;}
+.future-ttl{font-size:12px;font-weight:600;color:var(--ink);}
+.future-sub{font-size:11px;color:var(--ink2);margin-top:2px;}
+
+/* NAV FOOTER */
+.nav-foot{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:20px;border-top:1px solid var(--bdr);}
+
+/* NOTIFICATION */
+.notif{position:fixed;bottom:18px;right:18px;z-index:999;background:var(--okbg);border:1px solid var(--okbdr);border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--ok);display:flex;align-items:center;gap:7px;transform:translateY(60px);opacity:0;pointer-events:none;transition:all .32s cubic-bezier(.22,.68,0,1.2);box-shadow:0 2px 12px rgba(26,21,16,.10);}
+.notif.show{transform:translateY(0);opacity:1;}
+
+/* RESPONSIVE */
+@media(max-width:900px){.s1-layout,.s2-layout,.s4-layout{grid-template-columns:1fr;}.s2-layout .lmnp-sidebar{position:static;}}
+@media(max-width:720px){.hdr-in{padding:0 14px;}.stepper{display:none;}.wrap{padding:20px 14px 60px;}.fg,.fg3{grid-template-columns:1fr;}.gamme-grid{grid-template-columns:1fr;}}
+
+/* ── Indicateur profil live (écran 1) ── */
+.profil-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:var(--r-pill);
+  background:var(--goldbg);border:1px solid var(--goldbdr);
+  font-family:var(--fMono);font-size:9px;color:var(--gold);
+  letter-spacing:.5px;margin-top:10px;
+}
+.profil-pill-icon{font-size:13px;}
+.profil-pill-txt{font-weight:600;}
+
+/* ── Gamme cards : enrichies ── */
+.gc-items{font-family:var(--fMono);font-size:8px;color:var(--ink3);margin-top:6px;line-height:1.6;}
+.gc-items span{display:block;}
+.gc.sel .gc-items{color:var(--ink2);}
+.gc-check{color:var(--ok);margin-right:3px;}
+.gc-plus {color:var(--gold);margin-right:3px;}
+
+/* ── Profil banner écran 2 ── */
+.profil-banner{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:8px 14px;border-radius:var(--r);
+  background:var(--goldbg);border:1px solid var(--goldbdr);
+  margin-bottom:12px;
+}
+.pb-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 9px;border-radius:var(--r-pill);
+  font-family:var(--fMono);font-size:8px;font-weight:700;
+  background:rgba(184,135,42,.18);color:var(--gold);
+  border:1px solid var(--goldbdr);white-space:nowrap;
+}
+.pb-sep{color:var(--goldbdr);font-size:11px;}
+
+/* ── Compteur Essentiel/Confort par pièce ── */
+.room-tags{display:flex;gap:5px;align-items:center;margin-top:2px;}
+.rtag{
+  display:inline-flex;align-items:center;
+  padding:1px 6px;border-radius:var(--r-pill);
+  font-family:var(--fMono);font-size:7px;font-weight:700;
+}
+.rtag-e{background:var(--goldbg);color:var(--gold);border:1px solid var(--goldbdr);}
+.rtag-c{background:var(--okbg);color:var(--ok);border:1px solid var(--okbdr);}
+
+/* ── Légende gamme sous rooms ── */
+.gamme-explain{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:9px 14px;border-radius:var(--r);
+  background:var(--bg2);border:1px solid var(--bdr);
+  font-size:10px;color:var(--ink2);margin-top:12px;line-height:1.7;
+}
+
+/* ── Sélecteur gamme live (écran 2) ── */
+.gamme-switcher{
+  display:flex;gap:6px;align-items:center;
+  padding:12px 16px;background:var(--surface);
+  border:1px solid var(--bdr);border-radius:var(--rl);
+  margin-bottom:16px;flex-wrap:wrap;
+}
+.gs-lbl{
+  font-family:var(--fMono);font-size:8px;color:var(--ink3);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-right:4px;white-space:nowrap;
+}
+.gs-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 13px;border-radius:var(--r);
+  font-family:var(--fMono);font-size:9px;font-weight:700;
+  cursor:pointer;border:1.5px solid var(--bdr2);
+  background:var(--surfZ);color:var(--ink2);
+  transition:all var(--tr);white-space:nowrap;
+}
+.gs-btn:hover{border-color:var(--goldbdr);color:var(--gold);}
+.gs-btn.active{
+  background:var(--goldbg);border-color:var(--gold);
+  color:var(--gold);box-shadow:0 0 0 2px var(--goldbg);
+}
+.gs-btn .gs-price{
+  font-size:8px;opacity:.7;font-weight:400;
+  border-left:1px solid currentColor;padding-left:6px;margin-left:2px;
+}
+.gs-delta{
+  margin-left:auto;font-size:10px;color:var(--ink2);
+  display:flex;align-items:center;gap:6px;
+}
+.gs-delta-val{
+  font-family:var(--fSerif);font-size:15px;font-weight:400;
+}
+.gs-delta-val.pos{color:var(--ok);}
+.gs-delta-val.neg{color:var(--err);}
+@keyframes packRefresh{0%{opacity:.4;transform:translateY(4px);}100%{opacity:1;transform:translateY(0);}}
+.pack-refreshing{animation:packRefresh 280ms cubic-bezier(.22,.68,0,1.1);}
+
+/* ── Écran 1 : champs structurants mis en avant ── */
+.driver-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:1px 7px;border-radius:var(--r-pill);
+  font-family:var(--fMono);font-size:7px;font-weight:700;
+  background:rgba(184,135,42,.12);color:var(--gold);
+  border:1px solid var(--goldbdr);vertical-align:middle;
+  margin-left:5px;
+}
+.fld.driver > .flbl::after{content:'';display:inline-flex;}
+.fld.driver .finp,.fld.driver .fsel{
+  border-color:var(--goldbdr);
+  box-shadow:0 0 0 2px var(--goldbg);
+}
+.fld.driver .finp:focus,.fld.driver .fsel:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 4px var(--goldbg);
+}
+
+/* ── Pill de résumé profil sur S1 (améliorée) ── */
+.profil-pill{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:8px 12px;border-radius:var(--r);
+  background:var(--goldbg);border:1px solid var(--goldbdr);
+  margin-top:10px;
+}
+.pp-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 8px;border-radius:var(--r-pill);
+  font-family:var(--fMono);font-size:8px;font-weight:700;
+  background:rgba(184,135,42,.18);color:var(--gold);
+}
+</style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="logo">
+      <div class="logo-i">I</div>
+      <div><div class="logo-n">IMMOMEUBLE</div><div class="logo-t">Packs mobilier LMNP</div></div>
+    </div>
+    <div class="stepper">
+      <button class="stp active" id="stp1" onclick="tryGoStep(1)"><div class="stp-n">1</div><span class="stp-l">Description</span></button>
+      <div class="stp-sep"></div>
+      <button class="stp" id="stp2" onclick="tryGoStep(2)"><div class="stp-n">2</div><span class="stp-l">Votre pack</span></button>
+      <div class="stp-sep"></div>
+      <button class="stp" id="stp3" onclick="tryGoStep(3)"><div class="stp-n">3</div><span class="stp-l">Enseignes</span></button>
+      <div class="stp-sep"></div>
+      <button class="stp" id="stp4" onclick="tryGoStep(4)"><div class="stp-n">4</div><span class="stp-l">Récap</span></button>
+    </div>
+    <span class="ver">v15</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════
+     SCREEN 1 — DESCRIPTION
+════════════════════════════════════ -->
+<div class="screen active" id="screen-1">
+<div class="wrap">
+  <div class="section-head fu">
+    <div class="scr-title">Décrivez votre bien</div>
+    <div class="scr-sub">Renseignez les caractéristiques du logement pour générer un pack LMNP optimisé en quelques secondes.</div>
+  </div>
+
+  <div id="s1-err" class="err-banner" style="display:none;">
+    <div class="err-ico">⚠</div>
+    <div style="flex:1;">
+      <div class="err-ttl">Impossible de générer le pack</div>
+      <div class="err-msg" id="s1-err-msg">Un problème est survenu. Réessayez.</div>
+      <div class="err-btns">
+        <button class="btn btn-p" style="font-size:12px;padding:6px 12px;" onclick="submitStep1()">↻ Réessayer</button>
+        <button class="btn btn-g" style="font-size:12px;padding:6px 12px;" onclick="document.getElementById('s1-err').style.display='none'">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="s1-layout">
+    <!-- Colonne principale -->
+    <div>
+      <!-- Bloc 1 : Le bien -->
+      <div class="card fu">
+        <div class="group-ttl">Le bien</div>
+        <div class="fg">
+          <div class="fld">
+            <label class="flbl">Type de bien<span class="req">*</span><span class="driver-badge">pilote le profil</span></label>
+            <select class="fsel" id="f-type" onchange="updateRecap()">
+              <option value="studio">Studio</option>
+              <option value="T1">T1</option>
+              <option value="T2" selected>T2</option>
+              <option value="T3">T3</option>
+              <option value="T4+">T4+</option>
+              <option value="coloc">Colocation</option>
+            </select>
+            <div class="fhnt">Type principal du lot à meubler.</div>
+          </div>
+          <div class="fld">
+            <label class="flbl">Surface habitable (m²)<span class="req">*</span><span class="driver-badge">compact si &lt;22 m²</span></label>
+            <input class="finp" type="number" id="f-surface" value="45" min="5" max="500" oninput="updateRecap()">
+            <div class="ferr" id="e-surface"></div>
+          </div>
+          <div class="fld">
+            <label class="flbl">Nombre de pièces<span class="req">*</span><span class="driver-badge">pilote le profil</span></label>
+            <input class="finp" type="number" id="f-pieces" value="2" min="1" max="10" oninput="updateRecap()" onchange="updateRecap()">
+            <div class="ferr" id="e-pieces"></div>
+            <div class="fhnt">Hors cuisine et salle de bain.</div>
+          </div>
+          <div class="fld">
+            <label class="flbl">Ville<span class="req">*</span></label>
+            <input class="finp" type="text" id="f-ville" value="" placeholder="Paris, Lyon, Montpellier…" oninput="updateRecap()">
+            <div class="ferr" id="e-ville"></div>
+          </div>
+          <div class="fld">
+            <label class="flbl">Code postal<span class="req">*</span></label>
+            <input class="finp" type="text" id="f-cp" value="" placeholder="75011" maxlength="10" oninput="updateRecap()">
+            <div class="ferr" id="e-cp"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloc 2 : Cible & style -->
+      <div class="card fu fu1" style="margin-top:14px;">
+        <div class="group-ttl">Cible &amp; style</div>
+        <div class="fg3">
+          <div class="fld">
+            <label class="flbl">Cible locataire<span class="driver-badge">adapte les items</span></label>
+            <select class="fsel" id="f-cible" onchange="updateRecap()">
+              <option value="etudiant">Étudiant</option>
+              <option value="jeune_actif" selected>Jeune actif</option>
+              <option value="famille">Famille</option>
+              <option value="courte_duree">Courte durée / Airbnb</option>
+              <option value="professionnel">Professionnel</option>
+            </select>
+            <div class="fhnt">Le pack s'adapte au profil cible.</div>
+          </div>
+          <div class="fld">
+            <label class="flbl">Style déco</label>
+            <select class="fsel" id="f-style">
+              <option value="">— Aucune préférence —</option>
+              <option value="contemporain" selected>Contemporain</option>
+              <option value="scandinave">Scandinave</option>
+              <option value="industriel">Industriel</option>
+              <option value="boheme">Bohème</option>
+              <option value="minimaliste">Minimaliste</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label class="flbl">Type de location</label>
+            <select class="fsel" id="f-typeloc">
+              <option value="longue_duree" selected>Longue durée</option>
+              <option value="courte_duree">Courte durée / Saisonnier</option>
+            </select>
+            <div class="fhnt">Influence la durabilité des matériaux.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloc 3 : Gamme & budget -->
+      <div class="card fu fu2" style="margin-top:14px;">
+        <div class="group-ttl">Niveau de gamme</div>
+        <div class="gamme-grid">
+          <div class="gc" id="gv-economique" onclick="selGamme('economique')">
+            <div class="gc-n">Budget</div><div class="gc-r">1 500 – 3 000 €</div>
+            <div class="gc-d">Socle LMNP garanti, entrée de gamme.</div>
+            <div class="gc-items">
+              <span><span class="gc-check">✓</span>11 critères LMNP couverts</span>
+              <span><span class="gc-check">✓</span>Mobilier essentiel uniquement</span>
+              <span style="color:var(--ink4);">— Items Confort retirés</span>
+            </div>
+          </div>
+          <div class="gc sel" id="gv-standard" onclick="selGamme('standard')">
+            <div class="gc-n">Standard</div><div class="gc-r">3 000 – 6 000 €</div>
+            <div class="gc-d">Confort optimal, rotation réduite.</div>
+            <div class="gc-items">
+              <span><span class="gc-check">✓</span>11 critères LMNP couverts</span>
+              <span><span class="gc-plus">＋</span>50–70% des items Confort</span>
+              <span><span class="gc-plus">＋</span>Canapé, étagères, tapis…</span>
+            </div>
+          </div>
+          <div class="gc" id="gv-premium" onclick="selGamme('premium')">
+            <div class="gc-n">Premium</div><div class="gc-r">6 000 – 12 000 €</div>
+            <div class="gc-d">Différenciation marché, loyer supérieur.</div>
+            <div class="gc-items">
+              <span><span class="gc-check">✓</span>11 critères LMNP couverts</span>
+              <span><span class="gc-plus">＋</span>100% des items Confort</span>
+              <span><span class="gc-plus">＋</span>Déco, électro, références premium</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="card-lbl">Budget mobilier indicatif</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px;">
+          <span style="font-family:var(--fSerif);font-size:32px;font-weight:400;color:var(--gold);" id="bud-disp">4 500 €</span>
+          <span style="font-size:11px;color:var(--ink2);" id="bud-lbl">Standard · 3 000 – 6 000 €</span>
+        </div>
+        <input type="range" id="f-budget" min="1500" max="15000" value="4500" step="100" oninput="updBudget(this.value)">
+        <div style="display:flex;justify-content:space-between;font-family:var(--fMono);font-size:8px;color:var(--ink3);margin-top:4px;">
+          <span>1 500 €</span><span>15 000 €</span>
+        </div>
+        <div class="fhnt" style="margin-top:9px;">Le pack est optimisé pour rester dans cette enveloppe tout en garantissant la conformité LMNP.</div>
+      </div>
+    </div>
+
+    <!-- Colonne latérale sticky -->
+    <div style="position:sticky;top:80px;">
+      <!-- Récap live -->
+      <div class="card recap-card fu fu1" style="margin-bottom:14px;">
+        <div class="card-lbl">Récap du projet</div>
+        <div class="recap-row"><span class="recap-k">Bien</span><span class="recap-v" id="rc-bien">T2 · 45 m²</span></div>
+        <div class="recap-row"><span class="recap-k">Localisation</span><span class="recap-v" id="rc-loc">—</span></div>
+        <div class="recap-row"><span class="recap-k">Cible</span><span class="recap-v" id="rc-cible">Jeune actif</span></div>
+        <div class="recap-row"><span class="recap-k">Gamme</span><span class="recap-v" id="rc-gamme">Standard</span></div>
+        <div class="recap-row"><span class="recap-k">Budget</span><span class="recap-v" id="rc-budget">3 000 – 6 000 €</span></div>
+        <!-- Indicateur profil typologique live -->
+        <div id="profil-pill" class="profil-pill" style="margin-top:10px;">
+          <span class="profil-pill-icon" id="pp-icon">🛏</span>
+          <span class="profil-pill-txt" id="pp-txt">Profil medium — 1 chambre + séjour</span>
+        </div>
+      </div>
+
+      <!-- Rappel LMNP -->
+      <div class="card fu fu2" style="margin-bottom:16px;">
+        <div class="card-lbl">✦ Conformité LMNP</div>
+        <p style="font-size:11px;color:var(--ink2);line-height:1.55;">
+          Le pack respecte la liste minimale du <strong>décret 2015-981</strong> : literie, plaques, réfrigérateur, vaisselle, luminaires, rangements…
+        </p>
+        <p style="font-size:11px;color:var(--ink2);line-height:1.55;margin-top:8px;">
+          <strong style="color:var(--gold);">✦ Essentiel LMNP</strong> = obligatoire légalement.<br>
+          <strong style="color:var(--ok);">＋ Confort</strong> = améliore l'attractivité et le loyer.
+        </p>
+      </div>
+
+      <button class="btn btn-p fu fu3" id="btn-gen" onclick="submitStep1()" style="width:100%;justify-content:center;padding:11px 22px;font-size:14px;">
+        ✦&nbsp;&nbsp;Générer mon pack LMNP →
+      </button>
+      <div style="text-align:center;font-size:10px;color:var(--ink3);margin-top:7px;" id="hint-time">Temps moyen : 5 à 10 secondes.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 2 — VOTRE PACK
+     Alimenté par GET /projects/{id}/pack
+════════════════════════════════════ -->
+<div class="screen" id="screen-2">
+<div class="wrap">
+
+  <!-- En-tête pack -->
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px;" class="fu">
+    <div>
+      <div class="scr-title" id="pack-title">Votre pack LMNP</div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:2px;" id="pack-subtitle"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <span id="lmnp-badge" class="badge badge-ok">✓ Conforme LMNP</span>
+      <button class="btn btn-g" style="font-size:11px;padding:5px 10px;" onclick="copyLink()">🔗 Copier le lien</button>
+    </div>
+  </div>
+  <!-- Profil banner — explicite le moteur adaptatif -->
+  <div class="profil-banner fu" id="profil-banner" style="display:none;">
+    <span id="pb-profile"></span>
+    <span class="pb-sep">·</span>
+    <span id="pb-type"></span>
+    <span class="pb-sep">·</span>
+    <span id="pb-gamme"></span>
+    <span class="pb-sep">·</span>
+    <span id="pb-cible"></span>
+    <span id="pb-surface-info" style="font-size:10px;color:var(--ink2);margin-left:4px;"></span>
+  </div>
+
+  <!-- Sélecteur gamme live — recharge le pack sans repasser par S1 -->
+  <div class="gamme-switcher fu" id="gamme-switcher" style="display:none;">
+    <span class="gs-lbl">Changer la gamme :</span>
+    <button class="gs-btn" id="gsb-economique" onclick="switchGamme('economique')">
+      Budget<span class="gs-price">× 0.70</span>
+    </button>
+    <button class="gs-btn active" id="gsb-standard" onclick="switchGamme('standard')">
+      Standard<span class="gs-price">× 1.0</span>
+    </button>
+    <button class="gs-btn" id="gsb-premium" onclick="switchGamme('premium')">
+      Premium<span class="gs-price">× 1.65</span>
+    </button>
+    <div class="gs-delta" id="gs-delta" style="display:none;">
+      <span style="font-size:10px;color:var(--ink3);">vs Standard</span>
+      <span class="gs-delta-val" id="gs-delta-val">—</span>
+    </div>
+  </div>
+
+  <!-- Gauge budget -->
+  <div class="card gauge-block fu fu1">
+    <div class="gauge-row">
+      <div>
+        <div class="gauge-cost" id="gauge-cost">—</div>
+        <div class="gauge-lbl">Coût total estimé — prix publics d'enseignes nationales</div>
+        <div class="reassurance" id="s2-reassurance" style="display:none;">
+          Les éléments <strong style="color:var(--gold);">✦ Essentiel LMNP</strong> couvrent le décret 2015-981.
+          Les éléments <strong style="color:var(--ok);">＋ Confort</strong> facilitent la location et justifient un meilleur loyer.
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div class="gauge-eco" id="gauge-eco">—</div>
+        <div style="font-size:11px;color:var(--ink2);margin-top:4px;" id="gauge-bgt">Budget : —</div>
+      </div>
+    </div>
+    <div class="gauge-track"><div class="gauge-fill gf-ok" id="gauge-fill" style="width:0%"></div></div>
+  </div>
+
+  <!-- Layout pièces + sidebar -->
+  <div class="s2-layout">
+    <div id="rooms-col" class="fu fu2">
+      <div style="padding:50px 0;text-align:center;color:var(--ink2);font-size:13px;">
+        Générez un pack à l'étape 1 pour voir ici la liste détaillée.
+      </div>
+    </div>
+    <div class="lmnp-sidebar fu fu3">
+      <!-- Explication différence gammes -->
+      <div class="card" style="margin-bottom:12px;background:var(--bg2);">
+        <div class="card-lbl">Ce que la gamme change</div>
+        <div id="gamme-explain-content">
+          <div style="font-size:11px;color:var(--ink2);line-height:1.6;">
+            <div style="margin-bottom:6px;"><strong style="color:var(--ink);">Essentiel LMNP</strong><br>Identique quelle que soit la gamme. 11 critères du décret 2015-981 toujours couverts.</div>
+            <div><strong style="color:var(--gold);">＋ Confort</strong><br><span id="gamme-diff-txt">50–70% des items confort inclus (Standard).</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-lbl">Conformité LMNP</div>
+        <div style="font-size:10px;color:var(--ink2);line-height:1.5;">Décret n°2015-981 — 11 catégories obligatoires.</div>
+
+        <!-- Barre de progression -->
+        <div id="lmnp-progress" style="display:none;">
+          <div style="display:flex;justify-content:space-between;margin-top:10px;margin-bottom:3px;">
+            <span style="font-family:var(--fMono);font-size:8px;color:var(--ink3);letter-spacing:1px;text-transform:uppercase;" id="lmnp-progress-lbl">0 / 11 critères</span>
+          </div>
+          <div class="lmnp-progress-bar">
+            <div class="lmnp-progress-fill partial" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Critères : manquants en haut, couverts en dessous -->
+        <div id="lmnp-list"></div>
+
+        <div class="fhnt" id="lmnp-note" style="margin-top:10px;"></div>
+
+        <!-- Note légale -->
+        <div style="margin-top:12px;padding:8px 10px;background:var(--goldbg);border:1px solid var(--goldbdr);border-radius:var(--r);font-size:10px;color:var(--ink2);line-height:1.55;">
+          Les éléments <strong style="color:var(--gold);">Essentiel LMNP</strong> garantissent la conformité légale et ne doivent pas être retirés.<br>
+          Les éléments <strong style="color:var(--ok);">Confort</strong> peuvent être ajustés sans risque fiscal.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav footer -->
+  <div class="nav-foot">
+    <button class="btn btn-g" onclick="tryGoStep(1)">← Modifier les informations</button>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+      <button class="btn btn-p" id="btn-enseignes" onclick="goToStep3()">Voir les enseignes →</button>
+      <span style="font-size:10px;color:var(--ink3);">Répartition du pack par marchand (IKEA, But, etc.).</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 3 — ENSEIGNES
+     Alimenté par GET /projects/{id}/retailers
+════════════════════════════════════ -->
+<div class="screen" id="screen-3">
+<div class="wrap">
+
+  <!-- Barre contexte -->
+  <div class="ctx-bar fu" id="s3-ctx">
+    <div class="ctx-it"><div class="ctx-lbl">Bien</div><div class="ctx-val" id="s3-bien">—</div></div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-it"><div class="ctx-lbl">Pack</div><div class="ctx-val" id="s3-pack" style="font-size:11px;color:var(--ink2);">—</div></div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-it"><div class="ctx-lbl">Total</div><div class="ctx-val" id="s3-total" style="color:var(--gold);font-weight:600;">—</div></div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-it"><div class="ctx-lbl">Enseignes</div><div class="ctx-val" id="s3-nb-ens">—</div></div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-it"><div class="ctx-lbl">Articles</div><div class="ctx-val" id="s3-nb-art">—</div></div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-it"><div class="ctx-lbl">Commandes</div><div class="ctx-val" id="s3-nb-cmd">—</div></div>
+    <div style="margin-left:auto;"><span id="s3-badge" class="badge badge-ok">✓ Conforme LMNP</span></div>
+  </div>
+
+  <div class="section-head fu fu1">
+    <div class="scr-title">Sourcing par enseigne</div>
+    <div class="scr-sub">Sous-total et liste d'articles par marchand — prêt à commander.</div>
+  </div>
+
+  <div id="ret-grid" class="fu fu2">
+    <div style="padding:40px 0;text-align:center;color:var(--ink2);font-size:13px;">Revenez à l'étape 2 pour générer d'abord un pack.</div>
+  </div>
+
+  <div class="nav-foot">
+    <button class="btn btn-g" onclick="tryGoStep(2)">← Retour au pack</button>
+    <button class="btn btn-p" onclick="goToStep4()">Récapitulatif →</button>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 4 — RÉCAP
+     Alimenté par GET /projects/{id}/summary
+════════════════════════════════════ -->
+<div class="screen" id="screen-4">
+<div class="wrap">
+  <div class="section-head fu">
+    <div class="scr-title">Récapitulatif du projet</div>
+    <div class="scr-sub" id="s4-sub">Pack LMNP généré</div>
+  </div>
+
+  <div class="s4-layout">
+    <!-- Col principale -->
+    <div>
+      <!-- Résumé financier -->
+      <div class="card fu">
+        <div class="card-lbl">Résumé financier</div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:16px;">
+          <span class="recap-fin-total" id="s4-total">—</span>
+          <span style="font-size:12px;color:var(--ink2);">Montant total du pack</span>
+        </div>
+        <div style="display:flex;gap:24px;padding:12px 0;border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);margin-bottom:16px;flex-wrap:wrap;">
+          <div>
+            <div style="font-family:var(--fMono);font-size:8px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;">Budget max</div>
+            <div style="font-family:var(--fSerif);font-size:16px;color:var(--ink);margin-top:2px;" id="s4-bgt">—</div>
+          </div>
+          <div>
+            <div style="font-family:var(--fMono);font-size:8px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;">Économie</div>
+            <div style="font-family:var(--fSerif);font-size:16px;margin-top:2px;" id="s4-eco">—</div>
+          </div>
+          <div>
+            <div style="font-family:var(--fMono);font-size:8px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;">Statut LMNP</div>
+            <div style="margin-top:4px;"><span id="s4-badge" class="badge badge-ok">✓ Conforme décret LMNP</span></div>
+          </div>
+        </div>
+
+        <div class="card-lbl">Répartition par enseigne</div>
+        <div id="s4-dist"></div>
+      </div>
+
+      <!-- Features futures -->
+      <div class="card fu fu1" style="margin-top:14px;background:var(--bg2);border-color:var(--bdr);">
+        <div class="card-lbl">Prochainement</div>
+        <div class="future-item">
+          <div class="future-ico">📈</div>
+          <div><div class="future-ttl">Estimation ROI</div><div class="future-sub">Rendement locatif estimé selon le marché local.</div></div>
+        </div>
+        <div class="future-item">
+          <div class="future-ico">📊</div>
+          <div><div class="future-ttl">Amortissement mobilier</div><div class="future-sub">Gain fiscal via l'amortissement LMNP au régime réel.</div></div>
+        </div>
+        <div class="future-item">
+          <div class="future-ico">🏷</div>
+          <div><div class="future-ttl">Loyer de marché</div><div class="future-sub">Fourchette de loyers basée sur les données de votre ville.</div></div>
+        </div>
+        <div class="future-item">
+          <div class="future-ico">📄</div>
+          <div><div class="future-ttl">Export PDF</div><div class="future-sub">Devis complet à transmettre à votre comptable ou banque.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Col latérale -->
+    <div>
+      <!-- Conformité -->
+      <div class="share-block fu" style="text-align:center;margin-bottom:14px;">
+        <div style="margin-bottom:12px;"><span id="s4-conf-badge" class="badge badge-ok">✓ Conforme LMNP</span></div>
+        <p style="font-size:11px;color:var(--ink2);line-height:1.55;">Pack conforme au <strong>décret n°2015-981</strong> — tous les équipements obligatoires sont couverts.</p>
+        <div id="s4-crit-list" style="margin-top:12px;border-top:1px solid var(--bdr);padding-top:10px;text-align:left;"></div>
+      </div>
+
+      <!-- Lien partage -->
+      <div class="share-block fu fu1">
+        <div class="card-lbl">Lien partage projet</div>
+        <div class="share-slug" id="s4-slug">Pack #—</div>
+        <button class="btn btn-p" id="btn-copy" onclick="copyLink4()" style="width:100%;justify-content:center;">🔗 Copier le lien</button>
+        <p style="font-size:10px;color:var(--ink3);margin-top:8px;text-align:center;line-height:1.4;">
+          Partagez ce lien avec votre comptable, banque ou agence.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-foot">
+    <button class="btn btn-g" onclick="tryGoStep(3)">← Retour aux enseignes</button>
+    <button class="btn btn-g" style="border-color:var(--goldbdr);color:var(--gold);" onclick="showNotif('Export PDF — disponible en Phase 4')">📄 Exporter en PDF</button>
+  </div>
+</div>
+</div>
+
+<!-- Notification toast -->
+<div class="notif" id="notif">✓ <span id="notif-msg"></span></div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   CONFIG — pointer vers votre API FastAPI
+═══════════════════════════════════════════════ */
+const API = (function() {
+  if (!location.hostname || location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    return 'http://localhost:8000';
+  return ''; // même origine en prod
+})();
+
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+const S = {
+  step: 1,
+  project_id: null,
+  public_slug: null,
+  pack: null,      // GET /projects/{id}/pack
+  retailers: null, // GET /projects/{id}/retailers
+  summary: null,   // GET /projects/{id}/summary
+  property: null,  // copie locale du formulaire
+  gamme: 'standard',
+};
+
+const GAMME = {
+  economique: { min: 1500, max: 3000,  label: 'Budget · 1 500 – 3 000 €',   mid: 2250 },
+  standard:   { min: 3000, max: 6000,  label: 'Standard · 3 000 – 6 000 €', mid: 4500 },
+  premium:    { min: 6000, max: 12000, label: 'Premium · 6 000 – 12 000 €', mid: 9000 },
+};
+const CIBLE_LBL = { etudiant:'Étudiant', jeune_actif:'Jeune actif', famille:'Famille', courte_duree:'Courte durée', professionnel:'Professionnel' };
+const ROOM_ICO  = { bedroom:'🛏', living_room:'🛋', kitchen:'🍳', bathroom:'🚿', entrance:'🚪', office:'💼', balcony:'🌿', other:'📦' };
+const ROOM_NAME = { bedroom:'Chambre', living_room:'Séjour', kitchen:'Cuisine', bathroom:'Salle de bain', entrance:'Entrée', office:'Bureau', balcony:'Balcon', other:'Autre' };
+const LMNP_LBL  = { couchage:'Couchage (lit + matelas)', occultation:'Occultation (rideaux)', rangements:'Rangements', plaques_cuisson:'Plaques de cuisson', four_ou_microondes:'Four / micro-ondes', refrigerateur:'Réfrigérateur', vaisselle:'Vaisselle & couverts', ustensiles_cuisine:'Ustensiles de cuisine', table_chaises:'Table + chaises', luminaires:'Luminaires', entretien:'Matériel d\'entretien', equipements_sdb:'Équipements SDB' };
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+function goStep(n) {
+  S.step = n;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + n).classList.add('active');
+  document.querySelectorAll('.stp').forEach((s, i) => {
+    s.classList.remove('active', 'done');
+    if (i + 1 === n) s.classList.add('active');
+    if (i + 1 < n)  s.classList.add('done'), s.querySelector('.stp-n').textContent = '✓';
+    if (i + 1 > n)  s.querySelector('.stp-n').textContent = String(i + 1);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function tryGoStep(n) {
+  if (n === 1) { goStep(1); return; }
+  if (!S.project_id) { showNotif('Générez d\'abord un pack à l\'étape 1'); return; }
+  if (n === 2) { goStep(2); return; }
+  if (n === 3) { goToStep3(); return; }
+  if (n === 4) { goToStep4(); return; }
+}
+
+/* ═══════════════════════════════════════════════
+   STEP 1 — FORMULAIRE
+═══════════════════════════════════════════════ */
+function selGamme(g) {
+  S.gamme = g;
+  document.querySelectorAll('.gc').forEach(c => c.classList.remove('sel'));
+  document.getElementById('gv-' + g).classList.add('sel');
+  const cfg = GAMME[g];
+  document.getElementById('f-budget').value = cfg.mid;
+  updBudget(cfg.mid);
+  document.getElementById('bud-lbl').textContent = cfg.label;
+  updateRecap();
+  // Si un pack est déjà visible, proposer de le mettre à jour
+  if (S.pack && S.project_id) {
+    switchGamme(g);
+  }
+}
+function updBudget(v) {
+  const n = parseInt(v);
+  const pct = ((n - 1500) / (15000 - 1500) * 100).toFixed(1);
+  document.getElementById('f-budget').style.setProperty('--pct', pct + '%');
+  document.getElementById('bud-disp').textContent = n.toLocaleString('fr-FR') + '\u202f€';
+  updateRecap();
+}
+updBudget(4500);
+
+function updateRecap() {
+  const type = document.getElementById('f-type').value;
+  const surf = document.getElementById('f-surface').value;
+  const ville = document.getElementById('f-ville').value.trim();
+  const cp    = document.getElementById('f-cp').value.trim();
+  const cible = document.getElementById('f-cible').value;
+  const cfg   = GAMME[S.gamme];
+  // property_type + surface_m2
+  document.getElementById('rc-bien').textContent  = type + ' · ' + (surf || '—') + ' m²';
+  document.getElementById('rc-loc').textContent   = ville ? (ville + (cp ? ' · ' + cp : '')) : '—';
+  document.getElementById('rc-cible').textContent = CIBLE_LBL[cible] || cible;
+  document.getElementById('rc-gamme').textContent = { economique:'Budget', standard:'Standard', premium:'Premium' }[S.gamme];
+  document.getElementById('rc-budget').textContent = cfg.min.toLocaleString('fr-FR') + ' – ' + cfg.max.toLocaleString('fr-FR') + ' €';
+
+  // Indicateur profil typologique live
+  const pt = (type||'').toLowerCase();
+  const prof = ['studio','t1'].includes(pt) ? 'small' : pt==='t2' ? 'medium' : 'large';
+  const profCfg = {
+    small:  { icon:'🛋', txt:'Profil small — 1 Chambre/Séjour combinée' },
+    medium: { icon:'🛏', txt:'Profil medium — 1 Chambre + Séjour' },
+    large:  { icon:'🏠', txt:'Profil large — ' + Math.max(2, Math.min((parseInt(document.getElementById('f-pieces').value)||2)-1,5)) + ' Chambres + Séjour' },
+  }[prof];
+  document.getElementById('pp-icon').textContent = profCfg.icon;
+  document.getElementById('pp-txt').textContent  = profCfg.txt;
+  // Chips détaillées dans la pill (Écran 1 uniquement)
+  const pillEl = document.getElementById('profil-pill');
+  const compact1 = prof==='small' && parseFloat(surf||40)<22;
+  pillEl.innerHTML = `
+    <span class="pp-chip">${profCfg.icon} ${profCfg.txt}</span>
+    ${compact1?'<span class="pp-chip">🪑 Meubles compacts forcés</span>':''}
+    <span style="font-size:9px;color:var(--ink3);margin-left:auto;">
+      Les champs <strong style="color:var(--gold);">dorés</strong> pilotent ce profil
+    </span>`;
+}
+
+function vl(id) { return document.getElementById(id).value.trim(); }
+function nv(id) { return parseFloat(document.getElementById(id).value); }
+function setErr(id, m) { const e = document.getElementById(id); if (e) e.textContent = m || ''; }
+function clrErr() { ['e-surface','e-pieces','e-ville','e-cp'].forEach(id => setErr(id,'')); document.querySelectorAll('.finp.err').forEach(el => el.classList.remove('err')); }
+function mrkErr(inp, err, msg) { document.getElementById(inp).classList.add('err'); setErr(err, msg); }
+
+function validate() {
+  clrErr(); let ok = true;
+  const s = nv('f-surface');
+  if (!s || s < 5 || s > 500) { mrkErr('f-surface','e-surface','Surface : 5 – 500 m²'); ok = false; }
+  const p = parseInt(document.getElementById('f-pieces').value);
+  if (!p || p < 1 || p > 10) { mrkErr('f-pieces','e-pieces','1 à 10 pièces'); ok = false; }
+  if (!vl('f-ville')) { mrkErr('f-ville','e-ville','Ville requise'); ok = false; }
+  const cp = vl('f-cp');
+  if (!cp || cp.length < 4 || cp.length > 10) { mrkErr('f-cp','e-cp','Code postal invalide'); ok = false; }
+  return ok;
+}
+
+function buildPayload() {
+  // ProjectCreate { property: PropertyCreate } — schemas.py
+  const cfg = GAMME[S.gamme];
+  return {
+    property: {
+      property_type:  vl('f-type'),
+      surface_m2:     nv('f-surface'),
+      rooms_count:    parseInt(document.getElementById('f-pieces').value),
+      city:           vl('f-ville'),
+      postal_code:    vl('f-cp'),
+      tenant_profile: vl('f-cible'),
+      rental_type:    vl('f-typeloc') || null,
+      decor_style:    vl('f-style')   || null,
+      budget_level:   S.gamme,
+      budget_min:     cfg.min,
+      budget_max:     cfg.max,
+    }
+  };
+}
+
+function setGenerateUI(loading) {
+  const btn  = document.getElementById('btn-gen');
+  const hint = document.getElementById('hint-time');
+  if (loading) {
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spin"></div>&nbsp;Génération en cours…';
+    if (hint) hint.style.display = 'none';
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = '✦&nbsp;&nbsp;Générer mon pack LMNP →';
+    if (hint) hint.style.display = '';
+  }
+}
+
+/* ─── POST /projects ─── */
+async function submitStep1() {
+  if (!validate()) return;
+  const payload = buildPayload();
+  S.property = payload.property; // PropertyCreateInput
+  document.getElementById('s1-err').style.display = 'none';
+  setGenerateUI(true);
+  try {
+    const res = await fetch(API + '/projects', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      let msg = `Erreur serveur (${res.status})`;
+      try { const b = await res.json(); if (b?.detail?.message) msg = b.detail.message; else if (typeof b?.detail === 'string') msg = b.detail; else if (res.status === 422 && Array.isArray(b?.detail)) { const f = b.detail[0]; msg = `Champ invalide — ${f?.loc?.slice(-1)[0] ?? 'champ'} : ${f?.msg ?? 'valeur incorrecte'}`; } } catch(_) {}
+      throw new Error(msg);
+    }
+    const data = await res.json();
+    S.project_id = data.project_id;
+    S.public_slug = data.public_slug;
+    S.pack = data; // POST /projects renvoie tout le pack pour l'écran 2
+    setGenerateUI(false);
+    renderStep2(data);
+    goStep(2);
+  } catch (err) {
+    setGenerateUI(false);
+    document.getElementById('s1-err-msg').textContent = err.message || 'Erreur inattendue.';
+    document.getElementById('s1-err').style.display = 'flex';
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   STEP 2 — VOTRE PACK
+   Data shape : GET /projects/{id}/pack
+   (même shape que la réponse de POST /projects)
+═══════════════════════════════════════════════ */
+function fmt(n) { return Number(n).toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + '\u202f€'; }
+
+/* ── Helpers rendu écran 2 ─────────────────────────────────────────────── */
+
+/** Construit une ligne PackItemOut */
+function buildItemRow(item, isEss) {
+  const row = document.createElement('div');
+  row.className = 'item-row ' + (isEss ? 'mandatory' : 'confort');
+  row.innerHTML = `
+    <div class="item-info">
+      <div class="item-name">${item.name}</div>
+      <div class="item-meta">
+        ${item.retailer  ? `<span class="item-retailer">${item.retailer}</span>`               : ''}
+        ${item.reference ? `<span class="item-ref">R\u00e9f.\u202f${item.reference}</span>` : ''}
+      </div>
+    </div>
+    <div class="item-right">
+      <span class="item-qty">\u00d7${item.quantity || 1}</span>
+      <span class="item-price">${fmt(item.total_price || 0)}</span>
+      <button class="item-toggle" title="Retirer cet \u00e9l\u00e9ment Confort"
+        onclick="toggleComfortItem(this,'${item.id}')">\u2715</button>
+    </div>`;
+  return row;
+}
+
+/** Construit une ligne LmnpCriterionStatus */
+function buildCritRow(c) {
+  const label = c.label || LMNP_LBL[c.code] || c.code;
+  const d = document.createElement('div');
+  d.className = 'lmnp-crit-row';
+  d.innerHTML = `
+    <div class="lmnp-dot ${c.is_covered ? 'dot-ok' : 'dot-miss'}"></div>
+    <span class="lmnp-crit-label ${c.is_covered ? 'lmnp-crit-ok' : 'lmnp-crit-miss'}">${label}</span>
+    <span class="lmnp-crit-check" style="color:${c.is_covered ? 'var(--ok)' : 'var(--err)'};">
+      ${c.is_covered ? '\u2713' : '!'}</span>`;
+  return d;
+}
+
+/** Phase 2 — toggle item Confort (placeholder) */
+function toggleComfortItem(btn, itemId) {
+  showNotif('Modification des items Confort \u2014 disponible en Phase\u00a02');
+}
+
+function renderStep2(data) {
+  /*
+   * data = {
+   *   project_id, public_slug,
+   *   property: { type_de_bien, surface_totale, ville, cible_locataire, niveau_gamme, budget_min, budget_max }
+   *   pack: { total_price, is_lmnp_compliant, savings_amount, savings_percent }
+   *   rooms: [{ room_id, type, name, total_price, items: [{ item_id, name, retailer, reference, tag_type (essentiel_lmnp|confort), qty, unit_price, total_price, product_url }] }]
+   *   lmnp_checklist: [{ key, label, is_covered }]
+   * }
+   */
+  // ProjectPackResponse : project_id, public_slug, property: PropertyOut, pack: PackOut
+  const prop  = data.property || {};
+  const pack  = data.pack     || {};
+  const rooms = pack.rooms    || [];          // RoomOut[] dans PackOut
+  const cl    = pack.lmnp_checklist || [];    // LmnpCriterionStatus[] dans PackOut
+
+  // Titre + profil banner
+  const tenantLbl = CIBLE_LBL[prop.tenant_profile] || prop.tenant_profile || '';
+  const levelLbl  = { economique:'Budget', standard:'Standard', premium:'Premium' }[prop.budget_level] || '';
+  const summaryStr = `Optimisé pour ${tenantLbl} à ${prop.city || '—'} — ${prop.property_type || ''} ${prop.surface_m2 || '—'} m²`;
+  document.getElementById('pack-title').textContent = `Pack LMNP — ${summaryStr} · ${levelLbl} · ${fmt(pack.total_price || 0)}`;
+  document.getElementById('pack-subtitle').textContent = '';
+
+  // Afficher et synchroniser le sélecteur gamme live
+  const switcher = document.getElementById('gamme-switcher');
+  if (switcher) {
+    switcher.style.display = '';
+    const bl = prop.budget_level || 'standard';
+    ['economique','standard','premium'].forEach(g => {
+      document.getElementById('gsb-' + g)?.classList.toggle('active', g === bl);
+    });
+    document.getElementById('gs-delta').style.display = 'none';
+  }
+
+  // Profil banner
+  const pt2  = (prop.property_type||'').toLowerCase();
+  const prof2 = ['studio','t1'].includes(pt2) ? 'small' : pt2==='t2' ? 'medium' : 'large';
+  const profLabel = {small:'Profil small',medium:'Profil medium',large:'Profil large'}[prof2];
+  const profDesc  = {
+    small: '1 Chambre/Séjour combinée',
+    medium:'1 Chambre + 1 Séjour',
+    large: `${Math.max(2,Math.min((prop.rooms_count||2)-1,5))} Chambres + Séjour`,
+  }[prof2];
+  const compact2 = prof2==='small' && (prop.surface_m2||40)<22;
+  const banner = document.getElementById('profil-banner');
+  banner.style.display = '';
+  document.getElementById('pb-profile').innerHTML = `<span class="pb-chip">📐 ${profLabel} — ${profDesc}</span>`;
+  document.getElementById('pb-type').innerHTML    = `<span class="pb-chip">🏠 ${prop.property_type||''} ${prop.surface_m2||''}m²${compact2?' · compact':''}</span>`;
+  document.getElementById('pb-gamme').innerHTML   = `<span class="pb-chip">✦ ${levelLbl}</span>`;
+  document.getElementById('pb-cible').innerHTML   = `<span class="pb-chip">👤 ${tenantLbl}</span>`;
+  document.getElementById('pb-surface-info').textContent = compact2 ? '→ meubles multi-usage forcés' : '';
+
+  // Explication gamme dans sidebar
+  const gammeExplain = {
+    economique: 'Aucun item Confort (Budget) — socle LMNP uniquement.',
+    standard:   '50–70% des items Confort inclus (Standard).',
+    premium:    '100% des items Confort + déco supplémentaire (Premium).',
+  }[prop.budget_level] || '';
+  document.getElementById('gamme-diff-txt').textContent = gammeExplain;
+
+  // Badge LMNP
+  const isOk = pack.is_lmnp_compliant !== false;
+  const badge = document.getElementById('lmnp-badge');
+  badge.className = 'badge ' + (isOk ? 'badge-ok' : 'badge-warn');
+  badge.textContent = isOk ? '✓ Conforme LMNP' : '⚠ Conformité partielle';
+
+  // Gauge
+  const total   = pack.total_price || 0;
+  const budgMax = prop.budget_max || 6000; // PropertyOut.budget_max
+  const savings = pack.savings_amount ?? (budgMax - total);
+  document.getElementById('gauge-cost').textContent = fmt(total);
+  document.getElementById('gauge-bgt').textContent  = `Budget\u202f: ${fmt(prop.budget_min || 0)}\u2013${fmt(budgMax)}`;
+  const econEl = document.getElementById('gauge-eco');
+  if (savings >= 0) {
+    econEl.className = 'gauge-eco eco-ok';
+    econEl.textContent = `✓\u202fÉconomie ${fmt(savings)} (${Math.abs(pack.savings_percent ?? ((savings / budgMax * 100))).toFixed(1)}\u202f%)`;
+  } else {
+    econEl.className = 'gauge-eco eco-over';
+    econEl.textContent = `⚠\u202fDépassement ${fmt(Math.abs(savings))}`;
+  }
+  const fillPct = Math.min(Math.round((total / budgMax) * 100), 100);
+  const fill    = document.getElementById('gauge-fill');
+  fill.className = 'gauge-fill ' + (savings >= 0 ? 'gf-ok' : 'gf-over');
+  fill.style.width = fillPct + '%';
+  document.getElementById('s2-reassurance').style.display = '';
+
+  // ── Pièces ────────────────────────────────────────────────────────────────
+  const col = document.getElementById('rooms-col');
+  col.innerHTML = '';
+
+  rooms.forEach(room => {
+    // RoomOut : room_type, label, mandatory_items_count, total_price, items[]
+    const typeKey  = room.room_type || 'other';
+    const ico      = ROOM_ICO[typeKey] || '📦';
+    const name     = room.label || ROOM_NAME[typeKey] || typeKey;
+    const allItems = room.items || [];
+    const essItems = allItems.filter(i => i.tag_type === 'essentiel_lmnp');
+    const cftItems = allItems.filter(i => i.tag_type !== 'essentiel_lmnp');
+    const essTotal = essItems.reduce((a, i) => a + (i.total_price || 0), 0);
+    const cftTotal = cftItems.reduce((a, i) => a + (i.total_price || 0), 0);
+
+    const div = document.createElement('div');
+    div.className = 'room-card';
+
+    // ── En-tête pièce ──
+    const hd = document.createElement('div');
+    hd.className = 'room-hd';
+    hd.innerHTML = `
+      <div class="room-hd-left">
+        <span class="room-ico">${ico}</span>
+        <div>
+          <div class="room-name">${name}</div>
+          <div class="room-chips">
+            ${essItems.length > 0 ? `<span class="room-chip chip-ess">✦ ${essItems.length} essentiel${essItems.length > 1 ? 's' : ''}</span>` : ''}
+            ${cftItems.length > 0 ? `<span class="room-chip chip-cft">＋ ${cftItems.length} confort</span>` : ''}
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;">
+        <span class="room-total">${fmt(room.total_price || 0)}</span>
+        <span class="room-chev open">▾</span>
+      </div>`;
+
+    // ── Corps : Essentiel LMNP d'abord, Confort ensuite ──
+    const body = document.createElement('div');
+    body.className = 'room-body';
+
+    if (essItems.length > 0) {
+      const lbl = document.createElement('div');
+      lbl.className = 'items-section-lbl lbl-ess';
+      lbl.textContent = '✦ Essentiel LMNP — obligatoire décret 2015-981';
+      body.appendChild(lbl);
+      essItems.forEach(item => body.appendChild(buildItemRow(item, true)));
+    }
+    if (cftItems.length > 0) {
+      const lbl = document.createElement('div');
+      lbl.className = 'items-section-lbl lbl-cft';
+      lbl.textContent = '\uFF0B Confort — améliore l\u2019attractivité et le loyer';
+      body.appendChild(lbl);
+      cftItems.forEach(item => body.appendChild(buildItemRow(item, false)));
+    }
+
+    // ── Pied pièce : sous-totaux Essentiel / Confort ──
+    const foot = document.createElement('div');
+    foot.className = 'room-foot';
+    foot.innerHTML = `
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        ${essTotal > 0 ? `<div class="room-foot-kpi"><span class="tag-e">\u2746 Essentiel</span><span style="color:var(--gold);font-family:var(--fSerif);font-size:13px;">${fmt(essTotal)}</span></div>` : ''}
+        ${cftTotal > 0 ? `<div class="room-foot-kpi"><span class="tag-c">\uFF0B Confort</span><span style="color:var(--ok);font-family:var(--fSerif);font-size:13px;">${fmt(cftTotal)}</span></div>` : ''}
+      </div>
+      <div style="font-family:var(--fMono);font-size:9px;color:var(--ink3);">${allItems.length} article${allItems.length > 1 ? 's' : ''}</div>`;
+
+    // ── Toggle accordéon ──
+    let open = true;
+    hd.addEventListener('click', () => {
+      open = !open;
+      body.style.display = open ? '' : 'none';
+      foot.style.display = open ? '' : 'none';
+      hd.querySelector('.room-chev').className = 'room-chev ' + (open ? 'open' : 'closed');
+      hd.className = 'room-hd' + (open ? '' : ' closed');
+    });
+
+    div.appendChild(hd);
+    div.appendChild(body);
+    div.appendChild(foot);
+    col.appendChild(div);
+  });
+
+  // ── Légende globale ──
+  const leg = document.createElement('div');
+  leg.className = 'legend';
+  leg.innerHTML = `<strong>Lecture\u202f:</strong> <span class="tag-e">\u2746 Essentiel LMNP</span> = obligatoire (décret 2015-981). <span class="tag-c">\uFF0B Confort</span> = recommandé pour mieux louer.`;
+  col.appendChild(leg);
+
+  // ── Checklist LMNP enrichie (manquants en haut, couverts en dessous) ──
+  const coveredCount = cl.filter(c =>  c.is_covered).length;
+  const totalCount   = cl.length || 11;
+  const pct          = totalCount ? Math.round(coveredCount / totalCount * 100) : 0;
+
+  const prog = document.getElementById('lmnp-progress');
+  if (prog) {
+    prog.style.display = '';
+    const fill = prog.querySelector('.lmnp-progress-fill');
+    fill.style.width = pct + '%';
+    fill.className   = 'lmnp-progress-fill' + (coveredCount === totalCount ? '' : ' partial');
+    const lbl = document.getElementById('lmnp-progress-lbl');
+    if (lbl) lbl.textContent = coveredCount + ' / ' + totalCount + ' crit\u00e8res couverts';
+  }
+
+  const llist = document.getElementById('lmnp-list');
+  llist.innerHTML = '';
+  const missing = cl.filter(c => !c.is_covered);
+  const covered = cl.filter(c =>  c.is_covered);
+
+  if (missing.length > 0) {
+    const h = document.createElement('div');
+    h.className = 'lmnp-section-lbl'; h.style.color = 'var(--err)';
+    h.textContent = '\u00c0 couvrir'; llist.appendChild(h);
+    missing.forEach(c => llist.appendChild(buildCritRow(c)));
+  }
+  if (covered.length > 0) {
+    const h = document.createElement('div');
+    h.className = 'lmnp-section-lbl';
+    h.textContent = 'Couverts'; llist.appendChild(h);
+    covered.forEach(c => llist.appendChild(buildCritRow(c)));
+  }
+}
+
+/* ─── GET /projects/{id}/pack ─── */
+async function fetchPack() {
+  if (!S.project_id) return;
+  try {
+    const res = await fetch(API + `/projects/${S.project_id}/pack`);
+    if (!res.ok) return;
+    const data = await res.json();
+    S.pack = data;
+    renderStep2(data);
+  } catch(_) {}
+}
+
+/* ═══════════════════════════════════════════════
+   STEP 3 — ENSEIGNES
+   Data shape : GET /projects/{id}/retailers
+═══════════════════════════════════════════════ */
+function renderStep3(data) {
+  /*
+   * data = {
+   *   total_amount, retailer_count, item_count, order_count, is_lmnp_compliant,
+   *   retailers: [{
+   *     retailer_id, name, subtotal, item_count, essential_count, comfort_count,
+   *     items: [{ item_id, room_name, name, reference, tag_type (essentiel_lmnp|confort), unit_price, qty, total_price, product_url }]
+   *   }]
+   * }
+   */
+  const prop = S.pack?.property || S.property || {};
+  // Barre contexte
+  document.getElementById('s3-bien').textContent   = `${prop.property_type || ''} · ${prop.surface_m2 || '—'} m² · ${prop.city || '—'}`;
+  document.getElementById('s3-pack').textContent   = S.pack?.pack_title || document.getElementById('pack-title').textContent;
+  document.getElementById('s3-total').textContent  = fmt(data.total_amount || 0);
+  document.getElementById('s3-nb-ens').textContent = data.retailer_count || data.retailers?.length || '—';
+  document.getElementById('s3-nb-art').textContent = data.item_count || '—';
+  document.getElementById('s3-nb-cmd').textContent = data.order_count || data.retailers?.length || '—';
+
+  const isOk = data.is_lmnp_compliant !== false;
+  const eb   = document.getElementById('s3-badge');
+  eb.className = 'badge ' + (isOk ? 'badge-ok' : 'badge-warn');
+  eb.textContent = isOk ? '✓ Conforme LMNP' : '⚠ Conformité partielle';
+
+  // Grille enseignes
+  const grid = document.getElementById('ret-grid');
+  grid.innerHTML = '';
+
+  (data.retailers || []).forEach(ret => {
+    // RetailerBlockOut.essential_count / comfort_count — calculés backend ou fallback
+    const essCount = ret.essential_count ?? (ret.items || []).filter(i => i.tag_type === 'essentiel_lmnp').length;
+    const cftCount = ret.comfort_count   ?? ((ret.items || []).length - essCount);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'ret-card fu';
+
+    // Header
+    wrap.innerHTML = `
+      <div class="ret-hd">
+        <div class="ret-name">${ret.name}</div>
+        <div class="ret-cnt">${ret.item_count || ret.items?.length || 0} article${(ret.item_count || ret.items?.length || 0) > 1 ? 's' : ''}</div>
+        <div class="ret-kpis">
+          ${essCount > 0 ? `<span class="kpi-ess"><span class="tag-e">✦ Essentiel LMNP</span> ${essCount} essentiel${essCount > 1 ? 's' : ''}</span>` : ''}
+          ${cftCount > 0 ? `<span class="kpi-cft"><span class="tag-c">＋ Confort</span> ${cftCount} confort</span>` : ''}
+        </div>
+      </div>`;
+
+    // Table items
+    const tw = document.createElement('div');
+    tw.className = 'ret-table-wrap';
+    const tbl = document.createElement('table');
+    tbl.className = 'ret-table';
+    tbl.innerHTML = `<thead><tr>
+      <th>Article / Pièce</th>
+      <th class="center">Tag</th>
+      <th class="center">Réf.</th>
+      <th class="right">Prix u.</th>
+      <th class="center">Qté</th>
+      <th class="right">Total</th>
+    </tr></thead>`;
+    const tbody = document.createElement('tbody');
+
+    (ret.items || []).forEach(item => {
+      const tr = document.createElement('tr');
+      const isMand = item.tag_type === 'essentiel_lmnp'; // PackItemOut.tag_type
+      // Résoudre product_url (API v2) ou url (API v1)
+      const _pu = item.product_url || item.url || null;
+      const linkHtml = _pu
+        ? `<a class="td-link" href="${_pu}" target="_blank" rel="noopener noreferrer">↗ Voir le produit</a>`
+        : '<span class="td-link td-link--wip">↗ Lien bientôt</span>';
+      tr.innerHTML = `
+        <td class="td-name">
+          ${item.name}
+          <div class="td-room">${item.room_name || ''}</div>
+        </td>
+        <td class="td-center">${isMand ? '<span class="tag-e">✦ Essentiel</span>' : '<span class="tag-c">＋ Confort</span>'}</td>
+        <td class="td-center">${item.reference ? `<span class="td-ref">${item.reference}</span>` : '<span style="color:var(--ink4);font-size:10px;">—</span>'}</td>
+        <td class="td-right">${Number(item.unit_price || 0).toLocaleString('fr-FR')}\u202f€</td>
+        <td class="td-center">×${item.quantity || 1}</td>
+        <td class="td-price">${fmt(item.total_price || 0)}<br>${linkHtml}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    tbl.appendChild(tbody);
+    tw.appendChild(tbl);
+    wrap.appendChild(tw);
+
+    // Footer
+    const ft = document.createElement('div');
+    ft.className = 'ret-ft';
+    ft.innerHTML = `
+      <div>
+        <div class="ret-sub-lbl">Sous-total ${ret.name}</div>
+        <div class="ret-sub">${fmt(ret.subtotal || 0)}</div>
+      </div>
+      <button class="btn btn-g" style="font-size:12px;padding:7px 14px;" onclick="showNotif('Panier ${ret.name} — disponible en Phase 3')">🛒 Voir le panier</button>`;
+    wrap.appendChild(ft);
+    grid.appendChild(wrap);
+  });
+}
+
+/* ─── GET /projects/{id}/retailers ─── */
+async function goToStep3() {
+  if (!S.project_id) { showNotif('Générez d\'abord un pack'); return; }
+  if (S.retailers) { renderStep3(S.retailers); goStep(3); return; }
+  const btnEns = document.getElementById('btn-enseignes');
+  btnEns.disabled = true;
+  btnEns.innerHTML = '<div class="spin"></div>&nbsp;Chargement…';
+  try {
+    const res = await fetch(API + `/projects/${S.project_id}/retailers`);
+    if (!res.ok) throw new Error(`Erreur chargement enseignes (${res.status})`);
+    const data = await res.json();
+    S.retailers = data;
+    renderStep3(data);
+    goStep(3);
+  } catch (err) {
+    showNotif(err.message);
+  } finally {
+    btnEns.disabled = false;
+    btnEns.innerHTML = 'Voir les enseignes →';
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   STEP 4 — RÉCAP
+   Data shape : GET /projects/{id}/summary
+═══════════════════════════════════════════════ */
+function renderStep4(data) {
+  /*
+   * data = {
+   *   project_id, public_slug,
+   *   total_amount, budget_max, savings_amount,
+   *   is_lmnp_compliant,
+   *   retailers_summary: [{ name, subtotal }],
+   *   lmnp_checklist: [{ key, label, is_covered }]
+   * }
+   */
+  const prop = S.pack?.property || S.property || {};
+
+  document.getElementById('s4-sub').textContent = `Pack LMNP — ${prop.property_type || ''} ${prop.surface_m2 || '—'} m² · ${prop.city || '—'}`;
+  document.getElementById('s4-total').textContent = fmt(data.total_amount || 0);
+  document.getElementById('s4-bgt').textContent   = fmt(data.budget_max || prop.budget_max || 0);
+
+  const savings = data.savings_amount ?? 0;
+  const ecoEl   = document.getElementById('s4-eco');
+  ecoEl.textContent = (savings >= 0 ? '+\u202f' : '-\u202f') + fmt(Math.abs(savings));
+  ecoEl.style.color = savings >= 0 ? 'var(--ok)' : 'var(--err)';
+
+  const isOk = data.is_lmnp_compliant !== false;
+  ['s4-badge','s4-conf-badge'].forEach(id => {
+    const b = document.getElementById(id);
+    b.className = 'badge ' + (isOk ? 'badge-ok' : 'badge-warn');
+    b.textContent = isOk ? '✓ Conforme décret LMNP' : '⚠ Conformité partielle';
+  });
+
+  // Répartition enseignes
+  const dist = document.getElementById('s4-dist');
+  dist.innerHTML = '';
+  (data.retailers_summary || []).forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'dist-row';
+    row.innerHTML = `<div><div class="dist-name">${r.name}</div></div><span class="dist-amount">${fmt(r.subtotal || 0)}</span>`;
+    dist.appendChild(row);
+  });
+
+  // Lien partage
+  const slug = data.public_slug || S.public_slug || data.project_id || S.project_id || '—';
+  document.getElementById('s4-slug').textContent = `Pack #${slug}`;
+  S.public_slug = slug;
+
+  // Critères LMNP
+  const critList = document.getElementById('s4-crit-list');
+  critList.innerHTML = '';
+  (data.lmnp_checklist || []).filter(c => c.is_covered).slice(0, 7).forEach(c => {
+    const d = document.createElement('div');
+    d.style.cssText = 'display:flex;align-items:center;gap:6px;padding:3px 0;font-size:11px;color:var(--ok);';
+    d.innerHTML = `<span>✓</span><span>${c.label || LMNP_LBL[c.code] || c.code}</span>`;
+    critList.appendChild(d);
+  });
+}
+
+/* ─── GET /projects/{id}/summary ─── */
+async function goToStep4() {
+  if (!S.project_id) { showNotif('Générez d\'abord un pack'); return; }
+  if (S.summary) { renderStep4(S.summary); goStep(4); return; }
+  try {
+    const res = await fetch(API + `/projects/${S.project_id}/summary`);
+    if (!res.ok) throw new Error(`Erreur chargement résumé (${res.status})`);
+    const data = await res.json();
+    S.summary = data;
+    renderStep4(data);
+    goStep(4);
+  } catch (err) {
+    // Fallback : construire le résumé depuis ce qu'on a en mémoire
+    const fallback = buildSummaryFallback();
+    renderStep4(fallback);
+    goStep(4);
+  }
+}
+
+function buildSummaryFallback() {
+  const prop = S.pack?.property || S.property || {};
+  const pack  = S.pack?.pack || {};
+  const rooms = pack.rooms || []; // rooms dans PackOut
+  const total = pack.total_price || rooms.reduce((a, r) => a + (r.total_price || 0), 0);
+  const budgMax = prop.budget_max || S.property?.budget_max || 6000;
+  const retMap = {};
+  rooms.forEach(r => (r.items || []).forEach(i => {
+    const rn = i.retailer || 'Autres';
+    if (!retMap[rn]) retMap[rn] = { name: rn, subtotal: 0 };
+    retMap[rn].subtotal += i.total_price || 0;
+  }));
+  return {
+    project_id: S.project_id,
+    public_slug: S.public_slug,
+    total_amount: total,
+    budget_max: budgMax,
+    savings_amount: budgMax - total,
+    is_lmnp_compliant: pack.is_lmnp_compliant !== false,
+    retailers_summary: Object.values(retMap).sort((a, b) => b.subtotal - a.subtotal),
+    lmnp_checklist: S.pack?.lmnp_checklist || [],
+  };
+}
+
+/* ═══════════════════════════════════════════════
+   UTILITAIRES
+═══════════════════════════════════════════════ */
+function copyLink() {
+  if (!S.project_id) return;
+  const url = `${location.origin}/projects/${S.project_id}`;
+  navigator.clipboard?.writeText(url).catch(() => {});
+  showNotif('Lien copié\u202f: /projects/' + S.project_id.slice(0, 8) + '…');
+}
+function copyLink4() {
+  const slug = S.public_slug || S.project_id || '';
+  const url  = `${location.origin}/packs/${slug}`;
+  navigator.clipboard?.writeText(url).catch(() => {});
+  const btn = document.getElementById('btn-copy');
+  btn.textContent = '✓ Lien copié !';
+  setTimeout(() => btn.innerHTML = '🔗 Copier le lien', 2000);
+}
+
+let notifT;
+function showNotif(msg) {
+  document.getElementById('notif-msg').textContent = msg;
+  const n = document.getElementById('notif');
+  n.classList.add('show');
+  clearTimeout(notifT);
+  notifT = setTimeout(() => n.classList.remove('show'), 2800);
+}
+
+/* ═══════════════════════════════════════════════
+   DEMO — données mock pour tester sans backend
+   Supprimez ce bloc et remplacez par vos vrais appels API
+═══════════════════════════════════════════════ */
+(function injectDemo() {
+  const orig = window.submitStep1.bind(window);
+  window.submitStep1 = async function() {
+    if (!document.getElementById('f-ville').value.trim()) {
+      document.getElementById('f-ville').value = 'Poussan';
+    }
+    if (!document.getElementById('f-cp').value.trim()) {
+      document.getElementById('f-cp').value = '34560';
+    }
+    if (!validate()) return;
+    const payload = buildPayload();           // { property: PropertyCreateInput }
+    S.property = payload.property;            // PropertyCreateInput
+    setGenerateUI(true);
+    await new Promise(r => setTimeout(r, 800));
+    setGenerateUI(false);
+
+    const pid = 'proj-' + Math.random().toString(36).slice(2, 10);
+    S.project_id = pid;
+    S.public_slug = '244b88b0-f12a-4e9c-bc73-' + pid.slice(5);
+
+    // On passe payload.property (PropertyCreateInput) directement
+    const mockData = buildMockProjectResponse(payload.property);
+    S.pack = mockData;
+    renderStep2(mockData);
+    goStep(2);
+  };
+})();
+
+/* ══════════════════════════════════════════════════════════════════
+   SÉLECTEUR GAMME LIVE — Écran 2
+   Recharge le pack sans repasser par l'étape 1.
+   Recalcule buildMockProjectResponse avec la nouvelle gamme.
+══════════════════════════════════════════════════════════════════ */
+function switchGamme(newGamme) {
+  if (!S.property) return;
+
+  // Mettre à jour l'état
+  const oldGamme  = S.property.budget_level;
+  S.property.budget_level = newGamme;
+  S.gamme = newGamme;
+
+  // Mettre à jour les configs gamme dans le formulaire aussi
+  const cfg = GAMME[newGamme];
+  S.property.budget_min = cfg.min;
+  S.property.budget_max = cfg.max;
+
+  // Mettre à jour les boutons du switcher
+  ['economique','standard','premium'].forEach(g => {
+    document.getElementById('gsb-' + g)?.classList.toggle('active', g === newGamme);
+  });
+
+  // Delta vs Standard
+  const GMULT = { economique: 0.70, standard: 1.0, premium: 1.65 };
+  const deltaEl = document.getElementById('gs-delta');
+  const deltaVal = document.getElementById('gs-delta-val');
+  if (newGamme !== 'standard' && S.pack?.pack?.total_price) {
+    const stdPrice  = Math.round(S.pack.pack.total_price / GMULT[oldGamme]);
+    const newPrice  = Math.round(stdPrice * GMULT[newGamme]);
+    const diff      = newPrice - stdPrice;
+    deltaEl.style.display = '';
+    deltaVal.textContent  = (diff >= 0 ? '+' : '') + fmt(diff);
+    deltaVal.className    = 'gs-delta-val ' + (diff >= 0 ? 'neg' : 'pos');
+  } else {
+    deltaEl.style.display = 'none';
+  }
+
+  // Réinitialiser retailers/summary (ils vont changer)
+  S.retailers = null;
+  S.summary   = null;
+
+  // Régénérer le pack avec la nouvelle gamme
+  const newData = buildMockProjectResponse(S.property);
+  S.pack = newData;
+
+  // Animer le rechargement
+  const col = document.getElementById('rooms-col');
+  col.classList.remove('pack-refreshing');
+  void col.offsetWidth; // force reflow
+  col.classList.add('pack-refreshing');
+
+  renderStep2(newData);
+}
+
+function buildMockProjectResponse(p) {
+  // p = PropertyCreateInput : property_type, surface_m2, rooms_count,
+  //     city, postal_code, tenant_profile, budget_level, budget_min, budget_max
+  const gmult = { economique: 0.70, standard: 1.0, premium: 1.65 }[p.budget_level] || 1;
+  // Profil typologique — même logique que generator.py
+  const pt      = (p.property_type || '').toLowerCase();
+  const profile = ['studio','t1'].includes(pt) ? 'small' : pt === 't2' ? 'medium' : 'large';
+  const compact   = profile === 'small' && (p.surface_m2 || 40) < 22;
+  const largeSurf = (p.surface_m2 || 40) >= ({small:35,medium:55,large:80}[profile] || 999);
+  // ── Catalogue adaptatif (même logique que generator.py) ──────────────
+  const CAT = {
+    chambre:[
+      {n:'Lit 140x200 sommier matelas',u:'https://www.ikea.com/fr/fr/cat/malm-serie-07468/',   ref:'MALM/MINNESUND', ret:'IKEA',              tag:'essentiel_lmnp',p:375,crit:['couchage']},
+      {n:'Rideaux occultants',u:'https://www.ikea.com/fr/fr/p/majgull-rideau-occultant-2-panneaux-gris-clair-10558995/',            ref:'MAJGULL',        ret:'IKEA',              tag:'essentiel_lmnp',p:85, crit:['occultation']},
+      {n:'Armoire 2 portes',u:'https://www.ikea.com/fr/fr/p/pax-armoire-blanc-00294785/',              ref:'PAX OSLO',       ret:'IKEA',              tag:'essentiel_lmnp',p:225,crit:['rangements']},
+      {n:'Plafonnier chambre',            ref:'RANARP',         ret:'IKEA',              tag:'essentiel_lmnp',p:55, crit:['luminaires']},
+      {n:'Lampe de chevet',               ref:'RANARP',         ret:'IKEA',              tag:'confort',       p:43, gmin:'standard'},
+      {n:'Table de chevet',               ref:'OSLO',           ret:'But',               tag:'confort',       p:65, gmin:'standard'},
+      {n:'Commode 3 tiroirs',             ref:'MALM',           ret:'IKEA',              tag:'confort',       p:149,gmin:'premium'},
+      {n:'Miroir chambre',                ref:'NISSEDAL',       ret:'IKEA',              tag:'confort',       p:89, gmin:'premium'},
+    ],
+    chambre_sejour:[
+      {n:'Canape-lit 2 places',u:'https://www.ikea.com/fr/fr/p/friheten-canape-lit-d-angle-de-rangement-skiftebo-brun-fonce-s79131378/',           ref:'FRIHETEN',       ret:'IKEA',              tag:'essentiel_lmnp',p:499,crit:['couchage'],       co:true},
+      {n:'Lit 90x200 sommier matelas',    ref:'MALM/MINNESUND', ret:'IKEA',              tag:'essentiel_lmnp',p:320,crit:['couchage'],       lo:true},
+      {n:'Rideaux occultants',            ref:'MAJGULL',        ret:'IKEA',              tag:'essentiel_lmnp',p:75, crit:['occultation']},
+      {n:'Penderie / rangement',          ref:'PAX',            ret:'IKEA',              tag:'essentiel_lmnp',p:160,crit:['rangements']},
+      {n:'Table basse + 2 chaises',       ref:'LACK/NORDMYRA',  ret:'IKEA',              tag:'essentiel_lmnp',p:90, crit:['table_chaises']},
+      {n:'Luminaire plafonnier',          ref:'RANARP',         ret:'IKEA',              tag:'essentiel_lmnp',p:75, crit:['luminaires']},
+      {n:'Etageres murales',              ref:'KALLAX',         ret:'IKEA',              tag:'confort',       p:59, gmin:'standard'},
+      {n:'Tapis sejour',                  ref:'Set deco',       ret:'Maisons du Monde',  tag:'confort',       p:89, gmin:'standard'},
+      {n:'Meuble TV compact',             ref:'BESTA',          ret:'IKEA',              tag:'confort',       p:110,gmin:'standard'},
+    ],
+    sejour:[
+      {n:'Table manger 4 personnes',      ref:'EKEDALEN',       ret:'IKEA',              tag:'essentiel_lmnp',p:175,crit:['table_chaises']},
+      {n:'Chaises (x4)',                  ref:'NORDIKA',        ret:'But',               tag:'essentiel_lmnp',p:190,crit:['table_chaises']},
+      {n:'Suspension + liseuse',          ref:'RANARP',         ret:'IKEA',              tag:'essentiel_lmnp',p:135,crit:['luminaires']},
+      {n:'Canape 2-3 places',             ref:'OSLO',           ret:'Maisons du Monde',  tag:'confort',       p:500,gmin:'standard'},
+      {n:'Meuble TV rangements bas',      ref:'BESTA',          ret:'IKEA',              tag:'confort',       p:140,gmin:'standard'},
+      {n:'Etageres murales',              ref:'KALLAX',         ret:'IKEA',              tag:'confort',       p:70, gmin:'standard'},
+      {n:'Tapis salon',                   ref:'Set deco',       ret:'Maisons du Monde',  tag:'confort',       p:120,gmin:'standard'},
+      {n:'Fauteuil appoint',              ref:'STRANDMON',      ret:'IKEA',              tag:'confort',       p:249,gmin:'premium'},
+      {n:'Decoration murale',             ref:'Set deco',       ret:'Maisons du Monde',  tag:'confort',       p:120,gmin:'premium'},
+      {n:'Table manger 6 personnes',      ref:'EKEDALEN XL',    ret:'IKEA',              tag:'confort',       p:265,gmin:'standard',lo:true},
+    ],
+    cuisine:[
+      {n:'Plaques vitroceramique',u:'https://www.boulanger.com/c/plaques-de-cuisson-vitroceramique',        ref:'WHIRLPOOL 60cm', ret:'Boulanger',         tag:'essentiel_lmnp',p:165,crit:['plaques_cuisson']},
+      {n:'Micro-ondes 20L',u:'https://www.boulanger.com/c/micro-onde-solo',               ref:'WHIRLPOOL MW',   ret:'Boulanger',         tag:'essentiel_lmnp',p:100,crit:['four_ou_microondes']},
+      {n:'Refrigerateur + congelateur',u:'https://www.boulanger.com/c/refrigerateur-congelateur',   ref:'SAMSUNG 250L',   ret:'Boulanger',         tag:'essentiel_lmnp',p:400,crit:['refrigerateur']},
+      {n:'Vaisselle & couverts',u:'https://www.ikea.com/fr/fr/p/dinera-service-18-pieces-beige-50269705/',          ref:'DINERA',         ret:'IKEA',              tag:'essentiel_lmnp',p:80, crit:['vaisselle']},
+      {n:'Ustensiles cuisine',u:'https://www.ikea.com/fr/fr/p/kavalkad-ensemble-3-casseroles-gris-fonce-20302338/',            ref:'KAVALKAD',       ret:'IKEA',              tag:'essentiel_lmnp',p:55, crit:['ustensiles_cuisine']},
+      {n:'Materiel entretien menager',    ref:'Set entretien',  ret:'Leroy Merlin',      tag:'essentiel_lmnp',p:50, crit:['entretien']},
+      {n:'Petit electromenager',          ref:'KAVALKAD',       ret:'IKEA',              tag:'confort',       p:105,gmin:'standard'},
+      {n:'Poubelle cuisine',              ref:'Set entretien',  ret:'Leroy Merlin',      tag:'confort',       p:35, gmin:'standard'},
+      {n:'Rangements cuisine',            ref:'OMAR',           ret:'IKEA',              tag:'confort',       p:70, gmin:'standard'},
+      {n:'Robot cuisine',                 ref:'SILVERCREST',    ret:'Boulanger',         tag:'confort',       p:149,gmin:'premium'},
+      {n:'Cafetiere dosettes',            ref:'NESPRESSO',      ret:'Boulanger',         tag:'confort',       p:99, gmin:'premium'},
+    ],
+    sdb:[
+      {n:'Miroir + tablette SDB',         ref:'GODMORGON',      ret:'IKEA',              tag:'confort',       p:120,gmin:'standard'},
+      {n:'Porte-serviettes',              ref:'GODMORGON',      ret:'IKEA',              tag:'confort',       p:55, gmin:'standard'},
+      {n:'Tapis de bain',                 ref:'TOFTBO',         ret:'IKEA',              tag:'confort',       p:35, gmin:'standard'},
+      {n:'Set accessoires SDB',           ref:'GODMORGON SET',  ret:'IKEA',              tag:'confort',       p:43, gmin:'standard'},
+    ],
+    bureau_etudiant:[
+      {n:'Bureau compact',u:'https://www.ikea.com/fr/fr/p/micke-bureau-blanc-10244743/',                ref:'MICKE',          ret:'IKEA',              tag:'confort',       p:89, gmin:'standard'},
+      {n:'Chaise de bureau',              ref:'LOBERGET',       ret:'IKEA',              tag:'confort',       p:99, gmin:'standard'},
+      {n:'Lampe bureau LED',              ref:'FORSA',          ret:'IKEA',              tag:'confort',       p:35, gmin:'standard'},
+    ],
+    famille_sejour:[
+      {n:'Canape 3 places robuste',       ref:'KIVIK',          ret:'IKEA',              tag:'confort',       p:650,gmin:'standard'},
+      {n:'Rangements supplementaires',   ref:'KALLAX',          ret:'IKEA',              tag:'confort',       p:95, gmin:'standard'},
+    ],
+    courte_duree:[
+      {n:'Linge de maison',               ref:'Set linge',      ret:'Maisons du Monde',  tag:'confort',       p:120,gmin:'standard'},
+      {n:'Decoration murale',             ref:'Set deco',       ret:'Maisons du Monde',  tag:'confort',       p:110,gmin:'standard'},
+      {n:'Lampes ambiance (x2)',           ref:'FADO',           ret:'IKEA',              tag:'confort',       p:79, gmin:'standard'},
+      {n:'Petit electro accueil',         ref:'Set accueil',    ret:'Boulanger',         tag:'confort',       p:159,gmin:'standard'},
+    ],
+  };
+  const GRANK = {economique:0, standard:1, premium:2};
+  const blevel = p.budget_level || 'standard';
+  function filt(base) {
+    return base
+      .filter(i => !(i.co && !compact) && !(i.lo && !largeSurf))
+      .filter(i => !i.gmin || GRANK[blevel] >= GRANK[i.gmin])
+      .filter(i => !(blevel==='economique' && i.tag==='confort' && i.gmin))
+      .map(i => ({
+        item_id:'i-'+Math.random().toString(36).slice(2,8),
+        name:i.n, reference:i.ref, retailer:i.ret,
+        tag_type:i.tag,
+        quantity:1,
+        unit_price:Math.round(i.p*gmult),
+        total_price:Math.round(i.p*gmult),
+        product_url:i.u||null,          // ← propagé depuis le catalogue (Phase 2)
+        is_lmnp_mandatory:i.tag==='essentiel_lmnp',
+        lmnp_criteria:i.crit||[],
+      }));
+  }
+  function mkRoom(type, label, base, extras=[]) {
+    const items = filt(base).concat(extras.flatMap(filt));
+    return {
+      room_id:'r-'+Math.random().toString(36).slice(2,8),
+      room_type:type, label, items,
+      mandatory_items_count:items.filter(i=>i.is_lmnp_mandatory).length,
+      total_price:items.reduce((a,i)=>a+i.total_price,0),
+    };
+  }
+  const rooms = [];
+  if (profile==='small') {
+    const ext=[];
+    if((p.tenant_profile||'')==='etudiant')     ext.push(CAT.bureau_etudiant);
+    if((p.tenant_profile||'')==='courte_duree') ext.push(CAT.courte_duree);
+    rooms.push(mkRoom('chambre_sejour','Chambre / Sejour',CAT.chambre_sejour,ext));
+  } else {
+    const nbCh = profile==='large' ? Math.max(2,Math.min((p.rooms_count||2)-1,5)) : 1;
+    for(let i=0;i<nbCh;i++){
+      const lbl = i===0 ? (nbCh>1?'Chambre principale':'Chambre') : 'Chambre '+(i+1);
+      const ext = (p.tenant_profile||'')==='etudiant'?[CAT.bureau_etudiant]:[];
+      rooms.push(mkRoom('chambre',lbl,CAT.chambre,ext));
+    }
+    const sejExt=[];
+    if((p.tenant_profile||'')==='famille')      sejExt.push(CAT.famille_sejour);
+    if((p.tenant_profile||'')==='courte_duree') sejExt.push(CAT.courte_duree);
+    rooms.push(mkRoom('sejour','Sejour',CAT.sejour,sejExt));
+  }
+  rooms.push(mkRoom('cuisine','Cuisine',CAT.cuisine));
+  rooms.push(mkRoom('sdb','Salle de bain',CAT.sdb));
+  const total = rooms.reduce((a,r)=>a+r.total_price,0);
+  const lmnp_checklist = [
+    {code:'couchage',           label:'Couchage (lit + matelas)',   is_covered:true},
+    {code:'occultation',        label:'Occultation (rideaux)',       is_covered:true},
+    {code:'rangements',         label:'Rangements',                  is_covered:true},
+    {code:'plaques_cuisson',    label:'Plaques de cuisson',          is_covered:true},
+    {code:'four_ou_microondes', label:'Four / micro-ondes',          is_covered:true},
+    {code:'refrigerateur',      label:'Réfrigérateur',               is_covered:true},
+    {code:'vaisselle',          label:'Vaisselle & couverts',        is_covered:true},
+    {code:'ustensiles_cuisine', label:'Ustensiles de cuisine',       is_covered:true},
+    {code:'table_chaises',      label:'Table + chaises',             is_covered:false},
+    {code:'luminaires',         label:'Luminaires',                  is_covered:true},
+    {code:'entretien',          label:'Matériel d\'entretien',       is_covered:true},
+  ];
+  // Pre-compute retailers for step 3
+  const retMap = {};
+  rooms.forEach(room => room.items.forEach(item => {
+    const rn = item.retailer || 'Autres';
+    if (!retMap[rn]) retMap[rn] = { name: rn, items:[], subtotal:0 };
+    retMap[rn].items.push({ ...item, room_name: room.name, product_url: item.product_url||null });
+    retMap[rn].subtotal += item.total_price;
+  }));
+  const retailers = Object.values(retMap).sort((a,b)=>b.subtotal-a.subtotal).map((r,i)=>({
+    retailer_id: 'ret-'+i, name:r.name,
+    subtotal: r.subtotal,
+    item_count: r.items.length,
+    essential_count: r.items.filter(i=>i.tag_type==='essentiel_lmnp').length,
+    comfort_count:   r.items.filter(i=>i.tag_type!=='essentiel_lmnp').length,
+    items: r.items,
+  }));
+  const mockRetailersResp = {
+    total_amount: total,
+    retailer_count: retailers.length,
+    item_count: rooms.reduce((a,r)=>a+r.items.length,0),
+    order_count: retailers.length,
+    is_lmnp_compliant: lmnp_checklist.every(c=>c.is_covered),
+    retailers,
+  };
+  S.retailers = mockRetailersResp;
+  const mockSummaryResp = {
+    project_id: S.project_id,
+    public_slug: S.public_slug,
+    total_amount: total,
+    budget_max: p.budget_max || 6000,
+    savings_amount: (p.budget_max || 6000) - total,
+    is_lmnp_compliant: lmnp_checklist.every(c=>c.is_covered),
+    retailers_summary: retailers.map(r=>({name:r.name,subtotal:r.subtotal})),
+    lmnp_checklist,
+  };
+  S.summary = mockSummaryResp;
+  return {
+    project_id: S.project_id,
+    public_slug: S.public_slug,
+    pack_title: `Pack ${{ economique:'Budget', standard:'Standard', premium:'Premium' }[p.budget_level] || p.budget_level} — ${p.property_type} ${p.surface_m2}\u202fm²`,
+    property: {
+      property_type:  p.property_type,
+      surface_m2:     p.surface_m2,
+      rooms_count:    p.rooms_count,
+      city:           p.city,
+      postal_code:    p.postal_code,
+      tenant_profile: p.tenant_profile,
+      rental_type:    p.rental_type   || null,
+      decor_style:    p.decor_style   || null,
+      budget_level:   p.budget_level,
+      budget_min:     p.budget_min,
+      budget_max:     p.budget_max,
+    },
+    pack: {
+      id:                'pack-' + S.project_id,
+      total_price:       total,
+      is_lmnp_compliant: lmnp_checklist.every(c=>c.is_covered),
+      savings_amount:    (p.budget_max || 6000) - total,
+      savings_percent:   (((p.budget_max || 6000) - total) / (p.budget_max || 6000) * 100),
+      rooms,             // RoomOut[] dans PackOut
+      lmnp_checklist,    // LmnpCriterionStatus[] dans PackOut
+    },
+    lmnp_checklist,
+  };
+}
+</script>
+</body>
+</html>

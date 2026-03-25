@@ -1,0 +1,41 @@
+name: IMMOMEUBLE — Tests CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    name: Tests backend (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Installation des dépendances
+        run: pip install -r requirements.txt
+
+      - name: Lancement des tests v2 (production)
+        run: pytest tests/test_projects.py -v --tb=short
+
+      - name: Lancement des tests v1 (rétrocompatibilité)
+        run: pytest tests/test_api.py -v --tb=short
+
+      - name: Rapport de couverture (optionnel)
+        if: matrix.python-version == '3.12'
+        run: |
+          pip install pytest-cov
+          pytest tests/ --cov=app --cov-report=term-missing --cov-fail-under=60
