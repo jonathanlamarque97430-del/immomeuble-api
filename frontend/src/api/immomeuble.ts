@@ -39,7 +39,7 @@ import type {
 const API_BASE =
   typeof import.meta !== "undefined" && import.meta.env?.VITE_API_URL
     ? import.meta.env.VITE_API_URL
-    : "http://localhost:8000";
+    : "https://immomeuble-api-production.up.railway.app";
 
 // ── Helper erreur (partagé v1 + v2) ───────────────────────────────────────────
 
