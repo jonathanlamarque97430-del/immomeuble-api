@@ -97,8 +97,8 @@ ITEMS_BEDROOM = [
     {"name": "Table de chevet",                 "reference": "HEMNES",      "category": "rangements",  "retailer": "IKEA",   "tag_type": "essentiel_lmnp", "unit_price": 69,  "quantity": 1, "lmnp_criteria": ["rangements"]},
     # Socle LMNP — luminaires
     {"name": "Plafonnier chambre",              "reference": "RANARP",      "category": "luminaires",  "retailer": "IKEA",   "tag_type": "essentiel_lmnp", "unit_price": 55,  "quantity": 1, "lmnp_criteria": ["luminaires"]},
-    # Confort Standard
-    {"name": "Lampe de chevet",                 "reference": "RANARP",      "category": "luminaires",  "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 43,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
+    # Confort Économique+ — lampe de chevet incluse dès économique
+    {"name": "Lampe de chevet",                 "reference": "RANARP",      "category": "luminaires",  "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 43,  "quantity": 1, "lmnp_criteria": []},
     # Confort Premium
     {"name": "Commode 3 tiroirs",               "reference": "MALM",        "category": "rangements",  "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 149, "quantity": 1, "lmnp_criteria": [], "gamme_min": "premium"},
     {"name": "Miroir chambre 50x150 cm",        "reference": "NISSEDAL",    "category": "miroir",      "retailer": "IKEA",   "tag_type": "confort",        "unit_price": 89,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "premium"},
@@ -126,13 +126,14 @@ ITEMS_LIVING_ROOM = [
     {"name": "Rideaux séjour",                  "reference": "HANNALILL",   "category": "occultation", "retailer": "IKEA",             "tag_type": "essentiel_lmnp", "unit_price": 55,  "quantity": 1, "lmnp_criteria": ["occultation"]},
     # Socle LMNP — luminaires séjour
     {"name": "Suspension + liseuse",            "reference": "RANARP",      "category": "luminaires",  "retailer": "IKEA",             "tag_type": "essentiel_lmnp", "unit_price": 135, "quantity": 1, "lmnp_criteria": ["luminaires"]},
-    # Confort Standard
-    {"name": "Canapé 3 places",                 "reference": "KIVIK",       "category": "canape",      "retailer": "IKEA",             "tag_type": "confort",        "unit_price": 549, "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
+    # Confort Économique+ — canapé inclus dès économique (essentiel confort séjour)
+    {"name": "Canapé 2-3 places",               "reference": "KIVIK",       "category": "canape",      "retailer": "IKEA",             "tag_type": "confort",        "unit_price": 549, "quantity": 1, "lmnp_criteria": []},
+    # Confort Standard — meuble TV, étagères, tapis, table basse
     {"name": "Table basse",                     "reference": "VITTSJO",     "category": "table_basse", "retailer": "IKEA",             "tag_type": "confort",        "unit_price": 65,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
     {"name": "Meuble TV / rangements bas",      "reference": "BESTA",       "category": "meuble_tv",   "retailer": "IKEA",             "tag_type": "confort",        "unit_price": 140, "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
     {"name": "Étagères murales",                "reference": "KALLAX",      "category": "etagere",     "retailer": "IKEA",             "tag_type": "confort",        "unit_price": 70,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
     {"name": "Tapis de salon",                  "reference": "Set déco",    "category": "tapis",       "retailer": "Maisons du Monde", "tag_type": "confort",        "unit_price": 120, "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
-    # Confort Premium
+    # Confort Premium — fauteuil + déco
     {"name": "Fauteuil d'appoint",              "reference": "STRANDMON",   "category": "fauteuil",    "retailer": "IKEA",             "tag_type": "confort",        "unit_price": 249, "quantity": 1, "lmnp_criteria": [], "gamme_min": "premium"},
     {"name": "Décoration murale (cadres)",      "reference": "Set déco",    "category": "deco",        "retailer": "Maisons du Monde", "tag_type": "confort",        "unit_price": 120, "quantity": 1, "lmnp_criteria": [], "gamme_min": "premium"},
     # Grande surface
@@ -173,8 +174,9 @@ ITEMS_KITCHEN = [
     {"name": "Planche à découper",                           "reference": "LEGITIMIG",       "category": "ustensiles_cuisine", "retailer": "IKEA",        "tag_type": "essentiel_lmnp", "unit_price": 10,  "quantity": 1, "lmnp_criteria": ["ustensiles_cuisine"]},
     # Entretien obligatoire LMNP
     {"name": "Poubelle de cuisine",                          "reference": "Set entretien",   "category": "entretien",          "retailer": "Leroy Merlin","tag_type": "essentiel_lmnp", "unit_price": 25,  "quantity": 1, "lmnp_criteria": ["entretien"]},
-    # Confort Standard
-    {"name": "Bouilloire",                                   "reference": "KAVALKAD",        "category": "petit_electro",      "retailer": "IKEA",        "tag_type": "confort",        "unit_price": 25,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
+    # Confort Économique+ — bouilloire incluse dès économique
+    {"name": "Bouilloire",                                   "reference": "KAVALKAD",        "category": "petit_electro",      "retailer": "IKEA",        "tag_type": "confort",        "unit_price": 25,  "quantity": 1, "lmnp_criteria": []},
+    # Confort Standard — grille-pain, égouttoir, rangements
     {"name": "Grille-pain",                                  "reference": "BRUN",            "category": "petit_electro",      "retailer": "IKEA",        "tag_type": "confort",        "unit_price": 25,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
     {"name": "Égouttoir vaisselle",                          "reference": "Set cuisine",     "category": "rangements",         "retailer": "Leroy Merlin","tag_type": "confort",        "unit_price": 20,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
     {"name": "Rangements cuisine (étagère)",                 "reference": "OMAR",            "category": "rangements",         "retailer": "IKEA",        "tag_type": "confort",        "unit_price": 70,  "quantity": 1, "lmnp_criteria": [], "gamme_min": "standard"},
